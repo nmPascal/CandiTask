@@ -1,0 +1,1 @@
+export const formInputs = ["name", "email", "password"];
