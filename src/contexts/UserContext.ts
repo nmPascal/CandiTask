@@ -7,8 +7,10 @@ import { EFormTypes } from "../utils";
 import { IUserProviderProps } from "../interfaces";
 
 export const UserContext = createContext<IUserProviderProps>({
+    error: null,
     user: null,
     formType: EFormTypes.REGISTER,
+    setError: () => { },
     setFormType: () => { },
     registerUser: () => { },
     loginUser: () => { },

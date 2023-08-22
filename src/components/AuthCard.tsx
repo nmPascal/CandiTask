@@ -1,19 +1,32 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 
+// contexts
 import { useUserContext } from "../contexts";
+
+// utils
 import { EFormTypes } from "../utils";
 
 export const AuthCard: FC = (): JSX.Element => {
-    const { formType, setFormType } = useUserContext();
+    const { error, formType, setError, setFormType, loginUser, registerUser } = useUserContext();
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
 
     useEffect(() => {
-        console.log('~> ', formType); //REMOVE
+        setEmail('');
+        setPassword('');
+        setName('');
+        setError(null);
     }, [formType]);
+
+    console.log('~> ', error); //REMOVE
 
     return (
         <div className="section">
             <div className="container">
                 <div className="row full-height justify-content-center">
+                    {error && <p className="error-message">{error}</p>}
                     <div className="col-12 text-center align-self-center py-5">
                         <div className="section pb-5 pt-5 pt-sm-2 text-center">
                             <h6 className="mb-0 pb-3">
@@ -42,18 +55,22 @@ export const AuthCard: FC = (): JSX.Element => {
                                                         type="email"
                                                         className="form-style"
                                                         placeholder="Email"
+                                                        value={email}
+                                                        onChange={(e) => setEmail(e.target.value)}
                                                     />
                                                     <i className="input-icon uil uil-at"></i>
                                                 </div>
-                                                <div className="form-group mt-2">
+                                                <div className="form-group mt-3">
                                                     <input
                                                         type="password"
                                                         className="form-style"
                                                         placeholder="Password"
+                                                        value={password}
+                                                        onChange={(e) => setPassword(e.target.value)}
                                                     />
                                                     <i className="input-icon uil uil-lock-alt"></i>
                                                 </div>
-                                                <button className="btn mt-5">
+                                                <button className="btn mt-5" onClick={() => loginUser({email, password})}>
                                                     Login
                                                 </button>
                                                 {/* <p className="mb-0 mt-4 text-center">
@@ -79,31 +96,34 @@ export const AuthCard: FC = (): JSX.Element => {
                                                         type="text"
                                                         className="form-style"
                                                         placeholder="Full Name"
+                                                        value={name}
+                                                        onChange={(e) => setName(e.target.value)}
                                                     />
                                                     <i className="input-icon uil uil-user"></i>
                                                 </div>
-                                                <div className="form-group mt-2">
+                                                <div className="form-group mt-3">
                                                     <input
                                                         type="email"
                                                         className="form-style"
                                                         placeholder="Email"
+                                                        value={email}
+                                                        onChange={(e) => setEmail(e.target.value)}
                                                     />
                                                     <i className="input-icon uil uil-at"></i>
                                                 </div>
-                                                <div className="form-group mt-2">
+                                                <div className="form-group mt-3">
                                                     <input
                                                         type="password"
                                                         className="form-style"
                                                         placeholder="Password"
+                                                        value={password}
+                                                        onChange={(e) => setPassword(e.target.value)}
                                                     />
                                                     <i className="input-icon uil uil-lock-alt"></i>
                                                 </div>
-                                                <a
-                                                    href="https://www.web-leb.com/code"
-                                                    className="btn mt-4"
-                                                >
+                                                <button className="btn mt-4" onClick={() => registerUser({name, email, password})}>
                                                     Register
-                                                </a>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>

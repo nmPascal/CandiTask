@@ -10,18 +10,7 @@ body {
     background: radial-gradient(ellipse at bottom, #1b2735 0%, #12141d 100%);
 }
 
-a:hover {
-    text-decoration: none;
-}
-
-.link {
-    color: #ffeba7;
-}
-
-.link:hover {
-    color: #c4c3ca;
-}
-
+/* FORM */
 p {
     font-weight: 500;
     font-size: 14px;
@@ -38,13 +27,6 @@ h6 span {
 
 .layout {
     width: 100%;
-}
-
-.form-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .section {
@@ -217,4 +199,18 @@ h6 span {
     background-color: #000000;
     color: #ffeba7;
     box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
+}
+
+.error-message {
+    color: firebrick;
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+    z-index: 10;
 }
