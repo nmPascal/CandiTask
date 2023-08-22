@@ -118,7 +118,6 @@ h6 span {
 }
 
 .checkbox:checked ~ .card-3d-wrap .card-3d-wrapper {
-    /*HERE ROTATE*/
     transform: rotateY(180deg);
 }
 
