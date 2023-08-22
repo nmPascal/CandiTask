@@ -9,7 +9,9 @@ function App() {
     return (
         <Layout>
             {!user ? <AuthCard /> : (
-                <></>
+                <>
+                    <h1 className="text-center">Welcome {user.name}</h1>
+                </>
             )}
         </Layout>
     );

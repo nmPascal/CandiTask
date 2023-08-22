@@ -18,6 +18,7 @@ export const AuthCard: FC = (): JSX.Element => {
         setPassword('');
         setName('');
         setError(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [formType]);
 
     console.log('~> ', error); //REMOVE
