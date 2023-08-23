@@ -1,4 +1,6 @@
 import { ReactNode } from "react";
+
+// contexts
 import { CandidaciesContext } from "../contexts";
 
 type Props = {
