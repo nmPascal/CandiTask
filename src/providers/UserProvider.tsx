@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { ReactNode, useEffect, useState } from "react";
 
 // contexts
@@ -67,15 +68,17 @@ export const UserProvider = ({ children }: Props) => {
 
     useEffect(() => {
         _checkIfLoggedIn();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    useEffect(() => {
+        setError(null);
+    }, [formType]);
 
     const propsValues = {
         formType,
         user,
         error,
         toggleFormType,
-        setError,
         signUp,
         signIn,
         logoutUser,

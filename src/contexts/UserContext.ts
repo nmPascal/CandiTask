@@ -11,7 +11,6 @@ export const UserContext = createContext<IUserProviderProps>({
     user: null,
     error: null,
     toggleFormType: () => { },
-    setError: () => { },
     signUp: () => { },
     signIn: () => { },
     logoutUser: () => { }

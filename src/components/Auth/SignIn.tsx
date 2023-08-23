@@ -6,23 +6,23 @@ export const SignIn: FC = (): JSX.Element => {
     return (
         <>
             <TextField
-                margin="normal"
-                required
-                fullWidth
                 id="email"
-                label="Email Address"
                 name="email"
-                autoComplete="email"
+                label="Email Address"
+                required
                 autoFocus
+                fullWidth
+                margin="normal"
+                autoComplete="email"
             />
             <TextField
-                margin="normal"
-                required
-                fullWidth
+                id="password"
                 name="password"
                 label="Password"
+                required
+                fullWidth
+                margin="normal"
                 type="password"
-                id="password"
                 autoComplete="current-password"
             />
             <FormControlLabel

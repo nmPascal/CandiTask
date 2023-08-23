@@ -13,43 +13,41 @@ export const SignUp: FC = (): JSX.Element => {
         <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
                 <TextField
-                    autoComplete="given-name"
-                    name="firstName"
-                    required
-                    fullWidth
                     id="firstName"
+                    name="firstName"
                     label="First Name"
+                    fullWidth
+                    autoComplete="given-name"
                     autoFocus
                 />
             </Grid>
             <Grid item xs={12} sm={6}>
                 <TextField
-                    required
-                    fullWidth
                     id="lastName"
-                    label="Last Name"
                     name="lastName"
+                    label="Last Name"
+                    fullWidth
                     autoComplete="family-name"
                 />
             </Grid>
             <Grid item xs={12}>
                 <TextField
+                    id="email"
+                    name="email"
+                    label="Email Address"
                     required
                     fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
                     autoComplete="email"
                 />
             </Grid>
             <Grid item xs={12}>
                 <TextField
-                    required
-                    fullWidth
+                    id="password"
                     name="password"
                     label="Password"
+                    required
                     type="password"
-                    id="password"
+                    fullWidth
                     autoComplete="new-password"
                 />
             </Grid>

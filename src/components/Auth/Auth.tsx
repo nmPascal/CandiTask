@@ -24,11 +24,25 @@ import { SignUp } from "./SignUp";
 import { SignIn } from "./SignIn";
 
 export const AuthForm: FC = (): JSX.Element => {
-    const { formType, toggleFormType } = useUserContext();
+    const { formType, error, toggleFormType, signUp, signIn } = useUserContext();
 
     const _handleSubmit = (ev: FormEvent<HTMLFormElement>) => {
         ev.preventDefault();
-        console.log("~> e", ev); //REMOVE
+        const { firstName, lastName, email, password } = ev.currentTarget;
+
+        if (formType === EFormTypes.REGISTER) {
+            signUp({
+                name: `${firstName.value} ${lastName.value}`,
+                email: email.value,
+                password: password.value,
+            });
+            return;
+        }
+
+        signIn({
+            email: email.value,
+            password: password.value,
+        });
     };
 
     return (
@@ -85,6 +99,7 @@ export const AuthForm: FC = (): JSX.Element => {
                     </Grid>
                 </Box>
             </Box>
+            {error && <Typography color="error" sx={{textAlign: "center", mt: 2}}>{error}</Typography>}
             <Copyright />
         </Container>
     );

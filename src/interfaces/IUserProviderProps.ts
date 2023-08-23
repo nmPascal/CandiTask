@@ -6,7 +6,6 @@ export interface IUserProviderProps {
     user: IUser | null;
     error: string | null;
     toggleFormType: () => void;
-    setError: (error: string | null) => void;
     signUp: (newUser: IUserRegister) => void;
     signIn: (credentials: IUserCredentials) => void;
     logoutUser: () => void;
