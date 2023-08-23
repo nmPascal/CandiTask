@@ -23,7 +23,6 @@ body {
     align-self: center;
     font-family: "Poppins", sans-serif;
     color: #ffeba7;
-    background-color: #1f2029;
-    overflow: hidden;
-    height: 100vh;
+    min-height: 100vh;
+    user-select: none;
 }

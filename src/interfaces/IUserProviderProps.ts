@@ -2,13 +2,13 @@
 import { EFormTypes } from "../utils";
 
 export interface IUserProviderProps {
-    error: string | null;
-    user: IUser | null;
     formType: EFormTypes;
+    user: IUser | null;
+    error: string | null;
+    toggleFormType: () => void;
     setError: (error: string | null) => void;
-    setFormType: (formType: EFormTypes) => void;
-    registerUser: (newUser: IUserRegister) => void;
-    loginUser: (credentials: IUserCredentials) => void;
+    signUp: (newUser: IUserRegister) => void;
+    signIn: (credentials: IUserCredentials) => void;
     logoutUser: () => void;
 }
 

@@ -1,13 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { UserProvider } from "./providers/UserProvider.tsx";
+import { ThemeProvider, createTheme } from "@mui/material";
 import App from "./App.tsx";
 import "./index.css";
-import { UserProvider } from "./providers/UserProvider.tsx";
+
+const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
+});
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
         <UserProvider>
-            <App />
+            <ThemeProvider theme={darkTheme}>
+                <App />
+            </ThemeProvider>
         </UserProvider>
     </React.StrictMode>
 );

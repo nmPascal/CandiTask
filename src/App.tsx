@@ -1,6 +1,6 @@
 import "./App.css";
 import { Layout } from "./components";
-import { AuthCard } from "./components/AuthCard";
+import { AuthForm } from "./components/Auth/Auth";
 import { useUserContext } from "./contexts";
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
 
     return (
         <Layout>
-            {!user ? <AuthCard /> : (
+            {!user ? <AuthForm /> : (
                 <>
                     <h1 className="text-center">Welcome {user.name}</h1>
                 </>

@@ -6,9 +6,11 @@ import { UserContext } from "../contexts";
 // interfaces
 import { IUser, IUserCredentials, IUserRegister } from "../interfaces";
 
-import { Account, ID } from "appwrite";
-
+// utils
 import { EFormTypes, client } from "../utils";
+
+// packages
+import { Account, ID } from "appwrite";
 
 type Props = {
     children: ReactNode;
@@ -20,6 +22,12 @@ export const UserProvider = ({ children }: Props) => {
     const [error, setError] = useState<string | null>(null);
     const [user, setUser] = useState<IUser | null>(null);
     const [formType, setFormType] = useState<EFormTypes>(EFormTypes.REGISTER);
+
+    const toggleFormType = () => {
+        setFormType((prev) => {
+            return prev === EFormTypes.LOGIN ? EFormTypes.REGISTER : EFormTypes.LOGIN;
+        });
+    };
 
     const _checkIfLoggedIn = () => {
         const storage = localStorage.getItem("cookieFallback");
@@ -37,14 +45,14 @@ export const UserProvider = ({ children }: Props) => {
         }
     };
 
-    const registerUser = (newUser: IUserRegister) => {
+    const signUp = (newUser: IUserRegister) => {
         const { email, password, name } = newUser;
         const promise = account.create(ID.unique(), email, password, name);
 
         promise.then(() => setFormType(EFormTypes.LOGIN), (err) => setError(err.message));
     };
 
-    const loginUser = (credentials: IUserCredentials) => {
+    const signIn = (credentials: IUserCredentials) => {
         const { email, password } = credentials;
         const promise = account.createEmailSession(email, password);
 
@@ -63,13 +71,13 @@ export const UserProvider = ({ children }: Props) => {
     }, []);
 
     const propsValues = {
-        error,
-        user,
         formType,
+        user,
+        error,
+        toggleFormType,
         setError,
-        setFormType,
-        registerUser,
-        loginUser,
+        signUp,
+        signIn,
         logoutUser,
     };
 
