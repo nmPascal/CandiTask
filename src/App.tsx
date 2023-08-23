@@ -1,7 +1,11 @@
 import "./App.css";
+
+// contexts
+import { useUserContext } from "./contexts";
+
+// components
 import { Layout } from "./components";
 import { AuthForm } from "./components/Auth/Auth";
-import { useUserContext } from "./contexts";
 
 function App() {
     const { user } = useUserContext();

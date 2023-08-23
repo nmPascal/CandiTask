@@ -1,6 +1,8 @@
 import { FC } from "react";
+
+// packages
 import Typography from "@mui/material/Typography";
-import Link from "@mui/material/Link";
+import { Link } from "@mui/material";
 
 export const Copyright: FC = (): JSX.Element => {
     return (
