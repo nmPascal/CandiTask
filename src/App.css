@@ -16,20 +16,6 @@ h6 span {
     font-weight: 700;
 }
 
-.layout {
-    /* width: 100%; */
-}
-
-.section {
-    position: relative;
-    width: 100%;
-    display: block;
-}
-
-.full-height {
-    min-height: 100vh;
-}
-
 [type="checkbox"]:checked,
 [type="checkbox"]:not(:checked) {
     display: none;
