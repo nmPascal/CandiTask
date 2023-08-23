@@ -4,7 +4,7 @@ import Link from "@mui/material/Link";
 
 export const Copyright: FC = (): JSX.Element => {
     return (
-        <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 8, mb: 4 }}>
+        <Typography variant="body2" color="text.secondary" align="center" sx={{ mt: 5, mb: 4 }}>
             {"Copyright © "}
             <Link color="inherit" href="https://code-chronicle-bypascal.netlify.app/" target="_blank">
                 Akaï
