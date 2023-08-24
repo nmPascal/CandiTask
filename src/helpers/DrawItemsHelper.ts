@@ -16,7 +16,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 export const DrawItemsHelper: IDrawerItemsHelperProps = {
     primary: [
-        { name: "Dashboard", icon: DashboardIcon },
+        { name: "Overview", icon: DashboardIcon },
         { name: "Add candidacy", icon: AddIcon},
         { name: "Candidacies", icon: ContentPasteSearchIcon},
         { name: "Companies", icon: ApartmentIcon},

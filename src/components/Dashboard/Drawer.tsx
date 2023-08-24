@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 // providers
-import { useDashboardContext, useAppThemeContext } from "../../providers";
+import { useDashboardContext } from "../../providers";
 
 // helpers
 import { DrawItemsHelper } from "../../helpers";
@@ -51,8 +51,11 @@ const StyledDynamicDrawer = styled(MuiDrawer, {
 }));
 
 export const Drawer: FC = (): JSX.Element => {
-    const { toggleThemeMode } = useAppThemeContext();
     const { drawerIsOpen, toggleDrawer } = useDashboardContext();
+
+    const handleItemClick = (item: string) => {
+        console.log(item);
+    };
 
     return (
         <StyledDynamicDrawer variant="permanent" open={drawerIsOpen}>
@@ -71,7 +74,7 @@ export const Drawer: FC = (): JSX.Element => {
             <Divider />
             <List component="nav">
                 {DrawItemsHelper.getItems(EDrawerItems.PRIMARY).map((item, idx) => (
-                    <ListItemButton key={idx}>
+                    <ListItemButton key={idx} onClick={() => handleItemClick(item.name)}>
                         <ListItemIcon>
                             <item.icon />
                         </ListItemIcon>
@@ -83,7 +86,7 @@ export const Drawer: FC = (): JSX.Element => {
                     User Account
                 </ListSubheader>
                 {DrawItemsHelper.getItems(EDrawerItems.SECONDARY).map((item, idx) => (
-                    <ListItemButton key={idx} onClick={toggleThemeMode}>
+                    <ListItemButton key={idx} onClick={() => handleItemClick(item.name)}>
                         <ListItemIcon>
                             <item.icon />
                         </ListItemIcon>

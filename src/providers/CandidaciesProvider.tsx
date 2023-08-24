@@ -1,11 +1,14 @@
 /* eslint-disable react-refresh/only-export-components */
-import { ReactNode, createContext, useContext } from "react";
+import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 
 // providers
 import { useUserContext } from "../providers";
 
+// helpers
+import { getAppointedCandidacies, transformDocumentsToCandidacies } from "../helpers";
+
 // interfaces
-import { ICandidaciesProviderProps } from "../interfaces";
+import { ICandidaciesProviderProps, ICandidacy } from "../interfaces";
 
 // utils
 import { client } from "../utils";
@@ -18,6 +21,8 @@ type Props = {
 };
 
 const CandidaciesContext = createContext<ICandidaciesProviderProps>({
+    allCandidacies: [],
+    appointments: [],
     createCandidacy: () => { },
     getCandidacies: () => { },
 });
@@ -31,8 +36,10 @@ export const CandidaciesProvider = ({ children }: Props) => {
     const { user } = useUserContext();
     const databases = new Databases(client);
 
+    const [allCandidacies, setAllCandidacies] = useState<ICandidacy[]>([]);
+    const [appointments, setAppointments] = useState<ICandidacy[]>([]);
+
     const createCandidacy = () => {
-        console.log('~> in', ); //REMOVE
         if (!user) return;
 
         const newObj = {
@@ -44,6 +51,7 @@ export const CandidaciesProvider = ({ children }: Props) => {
             remote: "yes",
             salary: "60k-90k",
             details: "React, TS, Redux, MUI",
+            url: "https://www.spacex.com/careers/list",
         };
 
         const promise = databases.createDocument(
@@ -61,13 +69,32 @@ export const CandidaciesProvider = ({ children }: Props) => {
         const promise = databases.listDocuments(
             DATABASE_ID,
             COLLECTION_ID,
-            //FIXME [Query.equal("uid", [user.userId])]
         );
 
-        promise.then((res) => console.log("~> res", res), (err) => console.log("~> err", err));
+        promise.then((res) => {
+            const { documents } = res;
+            setAllCandidacies(transformDocumentsToCandidacies(documents));
+        }, (err) => console.log("~> err", err));
     };
 
+    useEffect(() => {
+        if (!user) {
+            setAllCandidacies([]);
+            return;
+        }
+
+        getCandidacies();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user]);
+
+    useEffect(() => {
+        if (!allCandidacies.length) return;
+        setAppointments(getAppointedCandidacies(allCandidacies));
+    }, [allCandidacies]);
+
     const propsValues = {
+        allCandidacies,
+        appointments,
         createCandidacy,
         getCandidacies,
     };
