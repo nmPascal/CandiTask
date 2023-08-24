@@ -12,6 +12,7 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
 import LanguageIcon from '@mui/icons-material/Language';
 import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export const DrawItemsHelper: IDrawerItemsHelperProps = {
     primary: [
@@ -23,7 +24,8 @@ export const DrawItemsHelper: IDrawerItemsHelperProps = {
     ],
     secondary: [
         { name: "Profile", icon: PersonIcon },
-        { name: "Settings", icon: SettingsIcon}
+        { name: "Settings", icon: SettingsIcon},
+        { name: "Logout", icon: LogoutIcon}
     ],
 
     getItems: (items: EDrawerItems) => {
