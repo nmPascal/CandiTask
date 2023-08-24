@@ -1,4 +1,9 @@
 export enum EFormTypes {
-    LOGIN = "LOGIN",
-    REGISTER = "REGISTER"
+    LOGIN,
+    REGISTER
+}
+
+export enum EDrawerItems {
+    PRIMARY = "primary",
+    SECONDARY = "secondary"
 }

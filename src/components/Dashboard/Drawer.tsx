@@ -3,14 +3,16 @@ import { FC } from "react";
 // contexts
 import { useDashboardContext } from "../../contexts";
 
+// helpers
+import { DrawItemsHelper } from "../../helpers";
+
 // utils
-import { drawerWidth } from "../../utils";
+import { EDrawerItems, drawerWidth } from "../../utils";
 
 // packages
-import { Divider, IconButton, List, Toolbar, styled } from "@mui/material";
+import { Divider, IconButton, List, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Toolbar, styled } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { mainListItems, secondaryListItems } from "./listItems";
 
 const StyledDynamicDrawer = styled(MuiDrawer, {
     shouldForwardProp: (prop) => prop !== "open",
@@ -57,9 +59,26 @@ export const Drawer: FC = (): JSX.Element => {
             </Toolbar>
             <Divider />
             <List component="nav">
-                {mainListItems}
+                {DrawItemsHelper.getItems(EDrawerItems.PRIMARY).map((item, idx) => (
+                    <ListItemButton key={idx}>
+                        <ListItemIcon>
+                            <item.icon />
+                        </ListItemIcon>
+                        <ListItemText primary={item.name} />
+                    </ListItemButton>
+                ))}
                 <Divider sx={{ my: 1 }} />
-                {secondaryListItems}
+                <ListSubheader component="div" inset>
+                    User Account
+                </ListSubheader>
+                {DrawItemsHelper.getItems(EDrawerItems.SECONDARY).map((item, idx) => (
+                    <ListItemButton key={idx}>
+                        <ListItemIcon>
+                            <item.icon />
+                        </ListItemIcon>
+                        <ListItemText primary={item.name} />
+                    </ListItemButton>
+                ))}
             </List>
         </StyledDynamicDrawer>
     );
