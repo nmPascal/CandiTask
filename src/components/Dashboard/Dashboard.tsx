@@ -1,23 +1,20 @@
 import { FC } from "react";
 
+
+// packages
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-
-
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 
+// components
 import { Copyright } from "../Copyright";
 import { AppBar } from "./AppBar";
 import { Drawer } from "./Drawer";
 import { CssBaseline } from "@mui/material";
 
-
-
-
 export const Dashboard: FC = (): JSX.Element => {
-
     return (
             <Box sx={{ display: "flex" }}>
                 <CssBaseline />

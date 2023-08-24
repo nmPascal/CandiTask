@@ -1,10 +1,11 @@
-import "./App.css";
-
-// contexts
-import { useUserContext } from "./contexts";
+// providers
+import { useUserContext } from "./providers";
 
 // components
 import { Layout, AuthForm, Dashboard } from "./components";
+
+// styles
+import "./App.css";
 
 function App() {
     const { user } = useUserContext();

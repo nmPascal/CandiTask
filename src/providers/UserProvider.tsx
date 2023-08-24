@@ -1,11 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { ReactNode, useEffect, useState } from "react";
-
-// contexts
-import { UserContext } from "../contexts";
+/* eslint-disable react-refresh/only-export-components */
+import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 
 // interfaces
-import { IUser, IUserCredentials, IUserRegister } from "../interfaces";
+import { IUser, IUserCredentials, IUserProviderProps, IUserRegister } from "../interfaces";
 
 // utils
 import { EFormTypes, client } from "../utils";
@@ -17,9 +14,20 @@ type Props = {
     children: ReactNode;
 };
 
-// TODO: add isLoading
+const UserContext = createContext<IUserProviderProps>({
+    formType: EFormTypes.REGISTER,
+    user: null,
+    error: null,
+    toggleFormType: () => { },
+    signUp: () => { },
+    signIn: () => { },
+    logoutUser: () => { }
+});
+
+export const useUserContext = () => useContext(UserContext);
 
 export const UserProvider = ({ children }: Props) => {
+    // TODO: add isLoading
     const account = new Account(client);
 
     const [error, setError] = useState<string | null>(null);
@@ -70,6 +78,7 @@ export const UserProvider = ({ children }: Props) => {
 
     useEffect(() => {
         _checkIfLoggedIn();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {

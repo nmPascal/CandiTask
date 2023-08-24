@@ -1,8 +1,11 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { ReactNode, useEffect } from "react";
+/* eslint-disable react-refresh/only-export-components */
+import { ReactNode, createContext, useContext } from "react";
 
-// contexts
-import { CandidaciesContext, useUserContext } from "../contexts";
+// providers
+import { useUserContext } from "../providers";
+
+// interfaces
+import { ICandidaciesProviderProps } from "../interfaces";
 
 // utils
 import { client } from "../utils";
@@ -14,9 +17,15 @@ type Props = {
     children: ReactNode;
 };
 
+const CandidaciesContext = createContext<ICandidaciesProviderProps>({
+    createCandidacy: () => { },
+    getCandidacies: () => { },
+});
+
+export const useCandidaciesContext = () => useContext(CandidaciesContext);
+
 const DATABASE_ID = import.meta.env.VITE_APPWRITE_DATABASE_ID;
 const COLLECTION_ID = import.meta.env.VITE_APPWRITE_COLLECTION_ID;
-
 
 export const CandidaciesProvider = ({ children }: Props) => {
     const { user } = useUserContext();
@@ -31,6 +40,7 @@ export const CandidaciesProvider = ({ children }: Props) => {
             company: "SpaceX",
             position: "Software Engineer",
             country: "United States",
+            city: "Los Angeles",
             remote: "yes",
             salary: "60k-90k",
             details: "React, TS, Redux, MUI",
@@ -57,7 +67,10 @@ export const CandidaciesProvider = ({ children }: Props) => {
         promise.then((res) => console.log("~> res", res), (err) => console.log("~> err", err));
     };
 
-    const propsValues = {};
+    const propsValues = {
+        createCandidacy,
+        getCandidacies,
+    };
 
     return (
         <CandidaciesContext.Provider value={propsValues}>

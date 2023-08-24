@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-// contexts
-import { useDashboardContext } from '../../contexts';
+// providers
+import { useDashboardContext } from '../../providers';
 
 // utils
 import { drawerWidth } from "../../utils";

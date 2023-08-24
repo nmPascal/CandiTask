@@ -1,5 +1,7 @@
 import { ReactNode, FC } from 'react';
-import { useUserContext } from '../contexts';
+
+// providers
+import { useUserContext } from '../providers';
 
 type Props = {
     children: ReactNode;

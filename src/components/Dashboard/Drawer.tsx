@@ -1,7 +1,7 @@
 import { FC } from "react";
 
-// contexts
-import { useDashboardContext } from "../../contexts";
+// providers
+import { useDashboardContext, useAppThemeContext } from "../../providers";
 
 // helpers
 import { DrawItemsHelper } from "../../helpers";
@@ -51,6 +51,7 @@ const StyledDynamicDrawer = styled(MuiDrawer, {
 }));
 
 export const Drawer: FC = (): JSX.Element => {
+    const { toggleThemeMode } = useAppThemeContext();
     const { drawerIsOpen, toggleDrawer } = useDashboardContext();
 
     return (
@@ -82,7 +83,7 @@ export const Drawer: FC = (): JSX.Element => {
                     User Account
                 </ListSubheader>
                 {DrawItemsHelper.getItems(EDrawerItems.SECONDARY).map((item, idx) => (
-                    <ListItemButton key={idx}>
+                    <ListItemButton key={idx} onClick={toggleThemeMode}>
                         <ListItemIcon>
                             <item.icon />
                         </ListItemIcon>

@@ -1,7 +1,7 @@
 import { FC, FormEvent } from "react";
 
-// contexts
-import { useUserContext } from "../../contexts";
+// providers
+import { useUserContext } from "../../providers";
 
 // packages
 import {
