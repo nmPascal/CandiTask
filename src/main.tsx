@@ -4,6 +4,8 @@ import { UserProvider } from "./providers/UserProvider.tsx";
 import { ThemeProvider, createTheme } from "@mui/material";
 import App from "./App.tsx";
 import "./index.css";
+import { CandidaciesProvider } from "./providers/CandidaciesProvider.tsx";
+import { DashboardProvider } from "./providers/DashboardProvider.tsx";
 
 const darkTheme = createTheme({
     palette: {
@@ -20,9 +22,13 @@ const darkTheme = createTheme({
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
         <UserProvider>
-            <ThemeProvider theme={darkTheme}>
-                <App />
-            </ThemeProvider>
+            <DashboardProvider>
+                <CandidaciesProvider>
+                    <ThemeProvider theme={darkTheme}>
+                        <App />
+                    </ThemeProvider>
+                </CandidaciesProvider>
+            </DashboardProvider>
         </UserProvider>
     </React.StrictMode>
 );

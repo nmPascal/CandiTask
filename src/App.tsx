@@ -4,19 +4,14 @@ import "./App.css";
 import { useUserContext } from "./contexts";
 
 // components
-import { Layout } from "./components";
-import { AuthForm } from "./components/Auth/Auth";
+import { Layout, AuthForm, Dashboard } from "./components";
 
 function App() {
     const { user } = useUserContext();
 
     return (
         <Layout>
-            {!user ? <AuthForm /> : (
-                <>
-                    <h1 className="text-center">Welcome {user.name}</h1>
-                </>
-            )}
+            {user ? <Dashboard /> : <AuthForm />}
         </Layout>
     );
 }

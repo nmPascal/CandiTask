@@ -17,6 +17,8 @@ type Props = {
     children: ReactNode;
 };
 
+// TODO: add isLoading
+
 export const UserProvider = ({ children }: Props) => {
     const account = new Account(client);
 
