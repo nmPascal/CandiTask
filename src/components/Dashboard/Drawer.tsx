@@ -10,7 +10,17 @@ import { DrawItemsHelper } from "../../helpers";
 import { EDrawerItems, drawerWidth } from "../../utils";
 
 // packages
-import { Divider, IconButton, List, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Toolbar, styled } from "@mui/material";
+import {
+    Divider,
+    IconButton,
+    List,
+    ListItemButton,
+    ListItemIcon,
+    ListItemText,
+    ListSubheader,
+    Toolbar,
+    styled
+} from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
