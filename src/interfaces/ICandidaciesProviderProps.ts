@@ -10,7 +10,6 @@ type OmitKeys<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 export interface ICandidacy {
     id: string;
-    uid: string;
     company: string;
     country: string;
     location: string;
@@ -25,7 +24,7 @@ export interface ICandidacy {
 }
 
 // Create a new interface by omitting specific keys from ICandidacy
-type INewCandidacy = OmitKeys<ICandidacy, "createdAt" | "updatedAt" | "id" | "status" | "uid">;
+type INewCandidacy = OmitKeys<ICandidacy, "createdAt" | "updatedAt" | "id" | "status">;
 
 export interface ICompany {
     name: string;

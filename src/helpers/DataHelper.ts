@@ -8,9 +8,9 @@ import { ECandidacyStatus } from "../utils";
 import { Models } from "appwrite";
 
 export const transformDocumentsToCandidacies = (documents: Models.Document[]): ICandidacy[] => {
+    console.log('~> ', documents); //REMOVE
     return documents.map((doc) => ({
         id: doc.$id,
-        uid: doc.uid,
         company: doc.company,
         country: doc.country,
         location: doc.location,
@@ -23,10 +23,6 @@ export const transformDocumentsToCandidacies = (documents: Models.Document[]): I
         createdAt: doc.$createdAt,
         updatedAt: doc.$updatedAt,
     }));
-};
-
-export const filterCurrentUserCandidacies = (candidacies: ICandidacy[], userId: string): ICandidacy[] => {
-    return candidacies.filter((candidacy) => candidacy.uid === userId);
 };
 
 export const composeCompanyData = (candidacies: ICandidacy[]): ICompany[] => {
