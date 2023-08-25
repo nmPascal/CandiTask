@@ -40,7 +40,7 @@ export const Appointments: FC = (): JSX.Element => {
                         {appointments.map((row) => (
                             <TableRow key={row.id} style={{height: "50px"}}>
                                 <TableCell>{row.position}</TableCell>
-                                <TableCell>{row.country}</TableCell>
+                                <TableCell>{row.company}</TableCell>
                                 <TableCell>{row.remote}</TableCell>
                                 <TableCell align="right">
                                     <Link href={row.url} target="_blank">
