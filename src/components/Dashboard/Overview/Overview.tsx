@@ -5,7 +5,8 @@ import { Grid, Paper } from "@mui/material";
 
 // components
 import { Appointments } from "./Appointments";
-import { PieChart } from "./PieChart";
+import { StatusChart } from "./StatusChart";
+import { PopularCompanies } from "./PopularCompanies";
 
 export const Overview: FC = (): JSX.Element => {
     return (
@@ -19,7 +20,7 @@ export const Overview: FC = (): JSX.Element => {
                         height: 240,
                     }}
                 >
-                    {/* <Chart /> */}
+                    <PopularCompanies />
                 </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
@@ -31,7 +32,7 @@ export const Overview: FC = (): JSX.Element => {
                         height: 240,
                     }}
                 >
-                    <PieChart />
+                    <StatusChart />
                 </Paper>
             </Grid>
             <Grid item xs={12}>

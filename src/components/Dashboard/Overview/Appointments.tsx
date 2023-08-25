@@ -1,3 +1,12 @@
+import { FC } from "react";
+
+// providers
+import { useCandidaciesContext } from "../../../providers";
+
+// helpers
+import { getAppointedCandidacies } from "../../../helpers";
+
+// packages
 import {
     Link,
     Table,
@@ -7,11 +16,10 @@ import {
     TableRow,
     Typography
 } from "@mui/material";
-import { FC } from "react";
-import { useCandidaciesContext } from "../../../providers";
 
 export const Appointments: FC = (): JSX.Element => {
-    const { appointments } = useCandidaciesContext();
+    const { allCandidacies } = useCandidaciesContext();
+    const appointments = getAppointedCandidacies(allCandidacies);
 
     return (
         <>
@@ -44,14 +52,13 @@ export const Appointments: FC = (): JSX.Element => {
                     </TableBody>
                 </Table>
             ) : <Typography variant="body2" color="text.secondary" align="center">No appointments yet</Typography>}
-            {/* <Link
+            <Link
                 color="primary"
                 href="#"
-                onClick={preventDefault}
                 sx={{ mt: 3 }}
             >
-                See more orders
-            </Link> */}
+                See all candidacies
+            </Link>
         </>
     );
 };

@@ -4,13 +4,14 @@ import React from "react";
 import { useCandidaciesContext } from "../../../providers";
 
 // helpers
-import { isStatusChartComplete } from "../../../helpers";
+import { composeStatusChart, isStatusChartComplete } from "../../../helpers";
 
 // packages
 import { Divider, Typography } from "@mui/material";
 
-export const PieChart: React.FC = (): JSX.Element => {
-    const { statusChart } = useCandidaciesContext();
+export const StatusChart: React.FC = (): JSX.Element => {
+    const { allCandidacies } = useCandidaciesContext();
+    const statusChart = composeStatusChart(allCandidacies);
 
     const total = statusChart.reduce((sum, item) => sum + item.value, 0);
     const chartSize = 200;
@@ -19,7 +20,7 @@ export const PieChart: React.FC = (): JSX.Element => {
 
     return (
         <div className="pieChart">
-            {statusChart.length ? (
+            {allCandidacies.length ? (
                 <>
                     <Divider>
                         {statusChart.map(({ color, name }, idx) => (

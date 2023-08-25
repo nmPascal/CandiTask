@@ -5,10 +5,10 @@ import { ReactNode, createContext, useContext, useEffect, useState } from "react
 import { useUserContext } from "../providers";
 
 // helpers
-import { composeStatusChart, getAppointedCandidacies, transformDocumentsToCandidacies } from "../helpers";
+import { composeCompanyData, transformDocumentsToCandidacies } from "../helpers";
 
 // interfaces
-import { ICandidaciesProviderProps, ICandidacy, IStatusChart } from "../interfaces";
+import { ICandidaciesProviderProps, ICandidacy, ICompany } from "../interfaces";
 
 // utils
 import { client } from "../utils";
@@ -22,10 +22,8 @@ type Props = {
 
 const CandidaciesContext = createContext<ICandidaciesProviderProps>({
     allCandidacies: [],
-    appointments: [],
-    statusChart: [],
+    allCompanies: [],
     createCandidacy: () => { },
-    getCandidacies: () => { },
 });
 
 export const useCandidaciesContext = () => useContext(CandidaciesContext);
@@ -38,18 +36,17 @@ export const CandidaciesProvider = ({ children }: Props) => {
     const databases = new Databases(client);
 
     const [allCandidacies, setAllCandidacies] = useState<ICandidacy[]>([]);
-    const [appointments, setAppointments] = useState<ICandidacy[]>([]);
-    const [statusChart, setStatusChart] = useState<IStatusChart[]>([]);
+    const [allCompanies, setAllCompanies] = useState<ICompany[]>([]);
 
     const createCandidacy = () => {
         if (!user) return;
-
+        console.log('~> ', user.userId); //REMOVE
         const newObj = {
             uid: user.userId,
             company: "SpaceX",
             position: "Software Engineer",
             country: "United States",
-            city: "Los Angeles",
+            location: "Los Angeles",
             remote: "yes",
             salary: "60k-90k",
             details: "React, TS, Redux, MUI",
@@ -75,6 +72,7 @@ export const CandidaciesProvider = ({ children }: Props) => {
 
         promise.then((res) => {
             const { documents } = res;
+            // TODO: to filter current User candidacies, add permisions in ICanidacy
             setAllCandidacies(transformDocumentsToCandidacies(documents));
         }, (err) => console.log("~> err", err));
     };
@@ -84,23 +82,20 @@ export const CandidaciesProvider = ({ children }: Props) => {
             setAllCandidacies([]);
             return;
         }
-
+        // createCandidacy();
         getCandidacies();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user]);
 
     useEffect(() => {
         if (!allCandidacies.length) return;
-        setAppointments(getAppointedCandidacies(allCandidacies));
-        setStatusChart(composeStatusChart(allCandidacies));
+        setAllCompanies(composeCompanyData(allCandidacies));
     }, [allCandidacies]);
 
     const propsValues = {
         allCandidacies,
-        appointments,
-        statusChart,
+        allCompanies,
         createCandidacy,
-        getCandidacies,
     };
 
     return (

@@ -2,10 +2,8 @@ import { ECandidacyRemote, ECandidacyStatus } from "../utils";
 
 export interface ICandidaciesProviderProps {
     allCandidacies: ICandidacy[];
-    appointments: ICandidacy[];
-    statusChart: IStatusChart[];
+    allCompanies: ICompany[];
     createCandidacy: (candidacy: INewCandidacy) => void;
-    getCandidacies: () => void;
 }
 
 type OmitKeys<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
@@ -28,6 +26,13 @@ export interface ICandidacy {
 
 // Create a new interface by omitting specific keys from ICandidacy
 type INewCandidacy = OmitKeys<ICandidacy, "createdAt" | "updatedAt" | "id" | "status" | "uid">;
+
+export interface ICompany {
+    name: string;
+    country: string;
+    location: string;
+    totalCandidacies: number;
+}
 
 export interface IStatusChart {
     name: string;
