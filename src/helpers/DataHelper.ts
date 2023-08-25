@@ -31,6 +31,7 @@ export const filterCurrentUserCandidacies = (candidacies: ICandidacy[], userId: 
 
 export const composeCompanyData = (candidacies: ICandidacy[]): ICompany[] => {
     const companies: Record<string, ICompany> = {};
+    console.log('~> ', candidacies); //REMOVE
 
     candidacies.forEach((candidacy) => {
         if (companies[candidacy.company]) {

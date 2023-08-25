@@ -8,7 +8,6 @@ import { getPopularCompanies } from '../../../helpers';
 
 // packages
 import {
-    Link,
     Table,
     TableBody,
     TableCell,
@@ -48,13 +47,6 @@ export const PopularCompanies: FC = (): JSX.Element => {
                     </TableBody>
                 </Table>
             ) : <Typography variant="body2" color="text.secondary" align="center">No companies yet</Typography>}
-            <Link
-                color="primary"
-                href="#"
-                sx={{ mt: 2 }}
-            >
-                See all companies
-            </Link>
        </>
     );
 };
