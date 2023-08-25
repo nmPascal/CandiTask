@@ -5,7 +5,7 @@ import { ReactNode, createContext, useContext, useEffect, useState } from "react
 import { useUserContext } from "../providers";
 
 // helpers
-import { composeCompanyData, transformDocumentsToCandidacies } from "../helpers";
+import { composeCompanyData, filterCurrentUserCandidacies, transformDocumentsToCandidacies } from "../helpers";
 
 // interfaces
 import { ICandidaciesProviderProps, ICandidacy, ICompany } from "../interfaces";
@@ -72,8 +72,8 @@ export const CandidaciesProvider = ({ children }: Props) => {
 
         promise.then((res) => {
             const { documents } = res;
-            // TODO: to filter current User candidacies, add permisions in ICanidacy
-            setAllCandidacies(transformDocumentsToCandidacies(documents));
+            const candidacies = transformDocumentsToCandidacies(documents);
+            setAllCandidacies(filterCurrentUserCandidacies(candidacies, user.userId));
         }, (err) => console.log("~> err", err));
     };
 

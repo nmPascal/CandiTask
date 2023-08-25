@@ -10,7 +10,7 @@ import { Models } from "appwrite";
 export const transformDocumentsToCandidacies = (documents: Models.Document[]): ICandidacy[] => {
     return documents.map((doc) => ({
         id: doc.$id,
-        uid: doc.$uid,
+        uid: doc.uid,
         company: doc.company,
         country: doc.country,
         location: doc.location,
@@ -31,7 +31,6 @@ export const filterCurrentUserCandidacies = (candidacies: ICandidacy[], userId: 
 
 export const composeCompanyData = (candidacies: ICandidacy[]): ICompany[] => {
     const companies: Record<string, ICompany> = {};
-    console.log('~> ', candidacies); //REMOVE
 
     candidacies.forEach((candidacy) => {
         if (companies[candidacy.company]) {
