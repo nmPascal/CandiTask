@@ -12,21 +12,23 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
 import LanguageIcon from '@mui/icons-material/Language';
 import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { Overview } from './../components/Dashboard/Overview/Overview';
+import { NewCandidacy } from "../components";
 
-export const DrawItemsHelper: IDrawerItemsHelperProps = {
+export const DrawerItemsHelper: IDrawerItemsHelperProps = {
     primary: [
-        { name: "Overview", icon: DashboardIcon, tab: "overview" },
-        { name: "Add candidacy", icon: AddIcon, tab: "new"},
-        { name: "Candidacies", icon: ContentPasteSearchIcon, tab: "candidacies"},
-        { name: "Companies", icon: ApartmentIcon, tab: "companies"},
-        { name: "Job boards", icon: LanguageIcon, tab: "links"}
+        { name: "Overview", icon: DashboardIcon, component: Overview  },
+        { name: "Add candidacy", icon: AddIcon, component: NewCandidacy },
+        { name: "Candidacies", icon: ContentPasteSearchIcon, component: Overview },
+        { name: "Companies", icon: ApartmentIcon, component: Overview },
+        { name: "Job boards", icon: LanguageIcon, component: Overview }
     ],
     secondary: [
-        { name: "Profile", icon: PersonIcon, tab: "profile" },
-        { name: "Settings", icon: SettingsIcon, tab: "settings"}
+        { name: "Profile", icon: PersonIcon, component: Overview },
+        { name: "Settings", icon: SettingsIcon, component: Overview }
     ],
 
     getItems: (items: EDrawerItems) => {
-        return DrawItemsHelper[items];
+        return DrawerItemsHelper[items];
     }
 };

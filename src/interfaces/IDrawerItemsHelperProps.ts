@@ -1,3 +1,5 @@
+import { FC } from "react";
+
 // utils
 import { EDrawerItems } from "../utils";
 
@@ -13,6 +15,6 @@ export interface IDrawerItemsHelperProps {
 
 export interface IDrawerItem {
     name: string;
-    tab: string;
     icon: OverridableComponent<SvgIconTypeMap<NonNullable<unknown>, "svg">> & { muiName: string; };
+    component: FC;
 }

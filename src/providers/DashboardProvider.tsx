@@ -1,8 +1,15 @@
 /* eslint-disable react-refresh/only-export-components */
-import { ReactNode, createContext, useContext, useState } from "react";
+import {
+    ReactNode,
+    createContext,
+    useContext,
+    useState,
+} from "react";
 
 // interfaces
-import { IDashboardProviderProps } from "../interfaces";
+import { IDashboardProviderProps, IDrawerItem } from "../interfaces";
+import { DrawerItemsHelper } from "../helpers";
+import { EDrawerItems } from "../utils";
 
 type Props = {
     children: ReactNode;
@@ -10,16 +17,18 @@ type Props = {
 
 const DashboardContext = createContext<IDashboardProviderProps>({
     drawerIsOpen: true,
-    currentTab: "overview",
-    setCurrentTab: () => { },
-    toggleDrawer: () => { },
+    currentTab: DrawerItemsHelper.getItems(EDrawerItems.PRIMARY)[0],
+    toggleDrawer: () => {},
+    setCurrentTab: () => {},
 });
 
 export const useDashboardContext = () => useContext(DashboardContext);
 
 export const DashboardProvider = ({ children }: Props) => {
     const [drawerIsOpen, setDrawerIsOpen] = useState<boolean>(true);
-    const [currentTab, setCurrentTab] = useState<string>("overview");
+    const [currentTab, setCurrentTab] = useState<IDrawerItem>(
+        DrawerItemsHelper.getItems(EDrawerItems.PRIMARY)[0]
+    );
 
     const toggleDrawer = () => {
         setDrawerIsOpen(!drawerIsOpen);
@@ -28,8 +37,8 @@ export const DashboardProvider = ({ children }: Props) => {
     const propsValues = {
         drawerIsOpen,
         currentTab,
-        setCurrentTab,
         toggleDrawer,
+        setCurrentTab,
     };
 
     return (

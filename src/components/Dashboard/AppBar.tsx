@@ -41,7 +41,7 @@ const StyledDynamicAppBar = styled(MuiAppBar, {
 }));
 
 export const AppBar: FC = (): JSX.Element => {
-    const { drawerIsOpen, toggleDrawer } = useDashboardContext();
+    const { drawerIsOpen, currentTab, toggleDrawer } = useDashboardContext();
 
     return (
         <StyledDynamicAppBar position="absolute" open={drawerIsOpen}>
@@ -69,7 +69,7 @@ export const AppBar: FC = (): JSX.Element => {
                     noWrap
                     sx={{ flexGrow: 1 }}
                 >
-                    Dashboard
+                    {currentTab && currentTab.name}
                 </Typography>
                 <IconButton color="inherit">
                     <Badge badgeContent={4} color="secondary">

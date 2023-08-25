@@ -4,7 +4,7 @@ import { FC } from "react";
 import { useDashboardContext } from "../../providers";
 
 // helpers
-import { DrawItemsHelper } from "../../helpers";
+import { DrawerItemsHelper } from "../../helpers";
 
 // utils
 import { EDrawerItems, drawerWidth } from "../../utils";
@@ -69,8 +69,8 @@ export const Drawer: FC = (): JSX.Element => {
             </Toolbar>
             <Divider />
             <List component="nav">
-                {DrawItemsHelper.getItems(EDrawerItems.PRIMARY).map((item, idx) => (
-                    <ListItemButton key={idx} onClick={() => setCurrentTab(item.tab)}>
+                {DrawerItemsHelper.getItems(EDrawerItems.PRIMARY).map((item, idx) => (
+                    <ListItemButton key={idx} onClick={() => setCurrentTab(item)}>
                         <ListItemIcon>
                             <item.icon />
                         </ListItemIcon>
@@ -81,8 +81,8 @@ export const Drawer: FC = (): JSX.Element => {
                 <ListSubheader component="div" inset>
                     User Account
                 </ListSubheader>
-                {DrawItemsHelper.getItems(EDrawerItems.SECONDARY).map((item, idx) => (
-                    <ListItemButton key={idx} onClick={() => setCurrentTab(item.tab)}>
+                {DrawerItemsHelper.getItems(EDrawerItems.SECONDARY).map((item, idx) => (
+                    <ListItemButton key={idx} onClick={() => setCurrentTab(item)}>
                         <ListItemIcon>
                             <item.icon />
                         </ListItemIcon>

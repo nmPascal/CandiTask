@@ -1,6 +1,9 @@
+// interface
+import { IDrawerItem } from ".";
+
 export interface IDashboardProviderProps {
     drawerIsOpen: boolean;
-    currentTab: string;
-    setCurrentTab: (tab: string) => void;
+    currentTab: IDrawerItem;
     toggleDrawer: () => void;
+    setCurrentTab: (currentTab: IDrawerItem) => void;
 }

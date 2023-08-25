@@ -13,7 +13,6 @@ import { Copyright } from "../Copyright";
 import { AppBar } from "./AppBar";
 import { Drawer } from "./Drawer";
 import { CssBaseline } from "@mui/material";
-import { Overview } from "./Overview/Overview";
 
 export const Dashboard: FC = (): JSX.Element => {
     const { currentTab } = useDashboardContext();
@@ -37,13 +36,7 @@ export const Dashboard: FC = (): JSX.Element => {
             >
                 <Toolbar />
                 <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                    {currentTab === "overview" && <Overview />}
-                    {currentTab === "new" && <div>New</div>}
-                    {currentTab === "candidacies" && <div>Candidacies</div>}
-                    {currentTab === "companies" && <div>Companies</div>}
-                    {currentTab === "links" && <div>Job boards</div>}
-                    {currentTab === "profile" && <div>Profile</div>}
-                    {currentTab === "settings" && <div>Settings</div>}
+                    {currentTab && <currentTab.component />}
                     <Copyright />
                 </Container>
             </Box>
