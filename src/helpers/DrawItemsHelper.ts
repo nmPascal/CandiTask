@@ -12,20 +12,18 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
 import LanguageIcon from '@mui/icons-material/Language';
 import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
-import LogoutIcon from '@mui/icons-material/Logout';
 
 export const DrawItemsHelper: IDrawerItemsHelperProps = {
     primary: [
-        { name: "Overview", icon: DashboardIcon },
-        { name: "Add candidacy", icon: AddIcon},
-        { name: "Candidacies", icon: ContentPasteSearchIcon},
-        { name: "Companies", icon: ApartmentIcon},
-        { name: "Job boards", icon: LanguageIcon}
+        { name: "Overview", icon: DashboardIcon, tab: "overview" },
+        { name: "Add candidacy", icon: AddIcon, tab: "new"},
+        { name: "Candidacies", icon: ContentPasteSearchIcon, tab: "candidacies"},
+        { name: "Companies", icon: ApartmentIcon, tab: "companies"},
+        { name: "Job boards", icon: LanguageIcon, tab: "links"}
     ],
     secondary: [
-        { name: "Profile", icon: PersonIcon },
-        { name: "Settings", icon: SettingsIcon},
-        { name: "Logout", icon: LogoutIcon}
+        { name: "Profile", icon: PersonIcon, tab: "profile" },
+        { name: "Settings", icon: SettingsIcon, tab: "settings"}
     ],
 
     getItems: (items: EDrawerItems) => {

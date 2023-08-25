@@ -31,7 +31,7 @@ export const Appointments: FC = (): JSX.Element => {
                     <TableHead>
                         <TableRow>
                             <TableCell>Position</TableCell>
-                            <TableCell>Country</TableCell>
+                            <TableCell>Company</TableCell>
                             <TableCell>Remote</TableCell>
                             <TableCell align="right">Link</TableCell>
                         </TableRow>
