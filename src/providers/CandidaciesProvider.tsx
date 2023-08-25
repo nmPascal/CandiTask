@@ -5,10 +5,10 @@ import { ReactNode, createContext, useContext, useEffect, useState } from "react
 import { useUserContext } from "../providers";
 
 // helpers
-import { getAppointedCandidacies, transformDocumentsToCandidacies } from "../helpers";
+import { composeStatusChart, getAppointedCandidacies, transformDocumentsToCandidacies } from "../helpers";
 
 // interfaces
-import { ICandidaciesProviderProps, ICandidacy } from "../interfaces";
+import { ICandidaciesProviderProps, ICandidacy, IStatusChart } from "../interfaces";
 
 // utils
 import { client } from "../utils";
@@ -23,6 +23,7 @@ type Props = {
 const CandidaciesContext = createContext<ICandidaciesProviderProps>({
     allCandidacies: [],
     appointments: [],
+    statusChart: [],
     createCandidacy: () => { },
     getCandidacies: () => { },
 });
@@ -38,6 +39,7 @@ export const CandidaciesProvider = ({ children }: Props) => {
 
     const [allCandidacies, setAllCandidacies] = useState<ICandidacy[]>([]);
     const [appointments, setAppointments] = useState<ICandidacy[]>([]);
+    const [statusChart, setStatusChart] = useState<IStatusChart[]>([]);
 
     const createCandidacy = () => {
         if (!user) return;
@@ -90,11 +92,13 @@ export const CandidaciesProvider = ({ children }: Props) => {
     useEffect(() => {
         if (!allCandidacies.length) return;
         setAppointments(getAppointedCandidacies(allCandidacies));
+        setStatusChart(composeStatusChart(allCandidacies));
     }, [allCandidacies]);
 
     const propsValues = {
         allCandidacies,
         appointments,
+        statusChart,
         createCandidacy,
         getCandidacies,
     };

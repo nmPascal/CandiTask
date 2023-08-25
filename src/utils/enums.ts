@@ -16,11 +16,11 @@ export enum EDrawerItems {
 export enum ECandidacyRemote {
     YES = "yes",
     NO = "no",
-    HYBRID = "hybrid"
+    PARTIAL = "partial"
 }
 
 export enum ECandidacyStatus {
     PENDING = "pending",
-    BLOCKED = "blocked",
-    APPOINTMENT = "appointment",
+    REJECTED = "rejected",
+    DONE = "done",
 }
