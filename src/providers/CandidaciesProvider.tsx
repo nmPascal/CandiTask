@@ -8,7 +8,7 @@ import { useUserContext } from "../providers";
 import { composeCompanyData, filterCurrentUserCandidacies, transformDocumentsToCandidacies } from "../helpers";
 
 // interfaces
-import { ICandidaciesProviderProps, ICandidacy, ICompany } from "../interfaces";
+import { ICandidaciesProviderProps, ICandidacy, ICompany, INewCandidacy } from "../interfaces";
 
 // utils
 import { client } from "../utils";
@@ -38,21 +38,11 @@ export const CandidaciesProvider = ({ children }: Props) => {
     const [allCandidacies, setAllCandidacies] = useState<ICandidacy[]>([]);
     const [allCompanies, setAllCompanies] = useState<ICompany[]>([]);
 
-    const createCandidacy = () => {
+    const createCandidacy = (newCandidacy: INewCandidacy) => {
+        // TODO: error handling
         if (!user) return;
-        console.log('~> ', user.userId); //REMOVE
-        const newObj = {
-            uid: user.userId,
-            company: "SpaceX",
-            position: "Software Engineer",
-            country: "United States",
-            location: "Los Angeles",
-            remote: "yes",
-            salary: "60k-90k",
-            details: "React, TS, Redux, MUI",
-            url: "https://www.spacex.com/careers/list",
-        };
 
+        const newObj = { uid: user.userId, ...newCandidacy };
         const promise = databases.createDocument(
             DATABASE_ID,
             COLLECTION_ID,
@@ -60,7 +50,9 @@ export const CandidaciesProvider = ({ children }: Props) => {
             newObj,
         );
 
-        promise.then((res) => console.log("~> res", res), (err) => console.log("~> err", err));
+        promise.then(() => {
+            getCandidacies();
+        }, (err) => console.log("~> err", err));
     };
 
     const getCandidacies = () => {
@@ -90,6 +82,7 @@ export const CandidaciesProvider = ({ children }: Props) => {
     useEffect(() => {
         if (!allCandidacies.length) return;
         setAllCompanies(composeCompanyData(allCandidacies));
+        //FIXME: Appointments component call new data but not PopularCompanies
     }, [allCandidacies]);
 
     const propsValues = {

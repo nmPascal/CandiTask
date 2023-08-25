@@ -18,7 +18,6 @@ export const transformDocumentsToCandidacies = (documents: Models.Document[]): I
         url: doc.url,
         remote: doc.remote,
         salary: doc.salary,
-        details: doc.details,
         status: doc.status,
         createdAt: doc.$createdAt,
         updatedAt: doc.$updatedAt,

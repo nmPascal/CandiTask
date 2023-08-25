@@ -6,19 +6,19 @@ import { EDrawerItems } from "../utils";
 
 // packages
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import AddIcon from '@mui/icons-material/Add';
+import AddHomeWorkIcon from '@mui/icons-material/AddHomeWork';
 import ContentPasteSearchIcon from '@mui/icons-material/ContentPasteSearch';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import LanguageIcon from '@mui/icons-material/Language';
 import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { Overview } from './../components/Dashboard/Overview/Overview';
+import { Overview } from '../components/Overview/Overview';
 import { NewCandidacy } from "../components";
 
 export const DrawerItemsHelper: IDrawerItemsHelperProps = {
     primary: [
         { name: "Overview", icon: DashboardIcon, component: Overview  },
-        { name: "Add candidacy", icon: AddIcon, component: NewCandidacy },
+        { name: "Add candidacy", icon: AddHomeWorkIcon, component: NewCandidacy },
         { name: "Candidacies", icon: ContentPasteSearchIcon, component: Overview },
         { name: "Companies", icon: ApartmentIcon, component: Overview },
         { name: "Job boards", icon: LanguageIcon, component: Overview }

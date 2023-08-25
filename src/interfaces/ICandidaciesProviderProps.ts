@@ -18,14 +18,13 @@ export interface ICandidacy {
     url: string;
     remote: ECandidacyRemote;
     salary: string;
-    details: string;
     status: ECandidacyStatus;
     createdAt: string;
     updatedAt: string;
 }
 
 // Create a new interface by omitting specific keys from ICandidacy
-type INewCandidacy = OmitKeys<ICandidacy, "createdAt" | "updatedAt" | "id" | "status" | "uid">;
+export type INewCandidacy = OmitKeys<ICandidacy, "id" |  "uid" | "createdAt" | "updatedAt">;
 
 export interface ICompany {
     name: string;

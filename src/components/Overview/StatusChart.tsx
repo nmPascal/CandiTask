@@ -1,10 +1,10 @@
 import React from "react";
 
 // providers
-import { useCandidaciesContext } from "../../../providers";
+import { useCandidaciesContext } from "../../providers";
 
 // helpers
-import { composeStatusChart, isStatusChartComplete } from "../../../helpers";
+import { composeStatusChart, isStatusChartComplete } from "../../helpers";
 
 // packages
 import { Divider, Typography } from "@mui/material";

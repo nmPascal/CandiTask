@@ -1,10 +1,10 @@
 import { FC } from "react";
 
 // providers
-import { useCandidaciesContext } from "../../../providers";
+import { useCandidaciesContext } from "../../providers";
 
 // helpers
-import { getAppointedCandidacies } from "../../../helpers";
+import { getAppointedCandidacies } from "../../helpers";
 
 // packages
 import {

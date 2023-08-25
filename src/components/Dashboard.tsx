@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 // providers
-import { useDashboardContext } from "../../providers";
+import { useDashboardContext } from "../providers";
 
 // packages
 import Box from "@mui/material/Box";
@@ -9,7 +9,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 
 // components
-import { Copyright } from "../Copyright";
+import { Copyright } from "./Copyright";
 import { AppBar } from "./AppBar";
 import { Drawer } from "./Drawer";
 import { CssBaseline } from "@mui/material";
