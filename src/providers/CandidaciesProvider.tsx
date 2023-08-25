@@ -5,7 +5,7 @@ import { ReactNode, createContext, useContext, useEffect, useState } from "react
 import { useUserContext } from "../providers";
 
 // helpers
-import { composeCompanyData, filterCurrentUserCandidacies, transformDocumentsToCandidacies } from "../helpers";
+import { composeCompanyData, transformDocumentsToCandidacies } from "../helpers";
 
 // interfaces
 import { ICandidaciesProviderProps, ICandidacy, ICompany, INewCandidacy } from "../interfaces";
@@ -41,6 +41,18 @@ export const CandidaciesProvider = ({ children }: Props) => {
     const createCandidacy = (newCandidacy: INewCandidacy) => {
         // TODO: error handling
         if (!user) return;
+        console.log('~> ', user.userId); //REMOVE
+        const newObj = {
+            uid: user.userId,
+            company: "SpaceX",
+            position: "Software Engineer",
+            country: "United States",
+            location: "Los Angeles",
+            remote: "yes",
+            salary: "60k-90k",
+            details: "React, TS, Redux, MUI",
+            url: "https://www.spacex.com/careers/list",
+        };
 
         const newObj = { uid: user.userId, ...newCandidacy };
         const promise = databases.createDocument(
@@ -64,8 +76,7 @@ export const CandidaciesProvider = ({ children }: Props) => {
 
         promise.then((res) => {
             const { documents } = res;
-            const candidacies = transformDocumentsToCandidacies(documents);
-            setAllCandidacies(filterCurrentUserCandidacies(candidacies, user.userId));
+            setAllCandidacies(transformDocumentsToCandidacies(documents));
         }, (err) => console.log("~> err", err));
     };
 

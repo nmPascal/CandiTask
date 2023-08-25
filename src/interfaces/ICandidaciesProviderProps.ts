@@ -23,7 +23,6 @@ export interface ICandidacy {
     updatedAt: string;
 }
 
-// Create a new interface by omitting specific keys from ICandidacy
 export type INewCandidacy = OmitKeys<ICandidacy, "id" |  "uid" | "createdAt" | "updatedAt">;
 
 export interface ICompany {
