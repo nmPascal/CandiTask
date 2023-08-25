@@ -31,8 +31,6 @@ export const PopularCompanies: FC = (): JSX.Element => {
                     <TableHead>
                         <TableRow>
                             <TableCell>Company</TableCell>
-                            <TableCell>Country</TableCell>
-                            <TableCell>Location</TableCell>
                             <TableCell align="right">Candidacies</TableCell>
                         </TableRow>
                     </TableHead>
@@ -40,8 +38,6 @@ export const PopularCompanies: FC = (): JSX.Element => {
                         {popularCompanies.map((row, idx) => (
                             <TableRow key={idx}>
                                 <TableCell>{row.name}</TableCell>
-                                <TableCell>{row.country}</TableCell>
-                                <TableCell>{row.location}</TableCell>
                                 <TableCell align="right">{row.totalCandidacies}</TableCell>
                             </TableRow>
                         ))}
