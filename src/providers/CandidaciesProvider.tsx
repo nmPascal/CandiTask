@@ -41,18 +41,6 @@ export const CandidaciesProvider = ({ children }: Props) => {
     const createCandidacy = (newCandidacy: INewCandidacy) => {
         // TODO: error handling
         if (!user) return;
-        console.log('~> ', user.userId); //REMOVE
-        const newObj = {
-            uid: user.userId,
-            company: "SpaceX",
-            position: "Software Engineer",
-            country: "United States",
-            location: "Los Angeles",
-            remote: "yes",
-            salary: "60k-90k",
-            details: "React, TS, Redux, MUI",
-            url: "https://www.spacex.com/careers/list",
-        };
 
         const newObj = { uid: user.userId, ...newCandidacy };
         const promise = databases.createDocument(
