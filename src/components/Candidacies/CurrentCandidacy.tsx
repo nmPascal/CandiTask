@@ -9,6 +9,8 @@ import { getStatusColor } from '../../helpers';
 // packages
 import { Box, Button, Divider, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+
+// components
 import { ConfirmationDialog } from '../ConfirmationDialog';
 
 const useStyles = makeStyles({
