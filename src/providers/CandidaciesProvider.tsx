@@ -23,6 +23,7 @@ type Props = {
 const CandidaciesContext = createContext<ICandidaciesProviderProps>({
     allCandidacies: [],
     allCompanies: [],
+    error: "",
     createCandidacy: () => { },
 });
 
@@ -37,10 +38,15 @@ export const CandidaciesProvider = ({ children }: Props) => {
 
     const [allCandidacies, setAllCandidacies] = useState<ICandidacy[]>([]);
     const [allCompanies, setAllCompanies] = useState<ICompany[]>([]);
+    const [error, setError] = useState<string>("");
 
     const createCandidacy = (newCandidacy: INewCandidacy) => {
-        // TODO: error handling
         if (!user) return;
+
+        if (!newCandidacy.company) return setError("Company is required");
+        if (!newCandidacy.position) return setError("Position is required");
+        if (!newCandidacy.country) return setError("Country is required");
+        if (!newCandidacy.location) return setError("Location is required");
 
         const newObj = { uid: user.userId, ...newCandidacy };
         const promise = databases.createDocument(
@@ -52,7 +58,7 @@ export const CandidaciesProvider = ({ children }: Props) => {
 
         promise.then(() => {
             getCandidacies();
-        }, (err) => console.log("~> err", err));
+        }, (err) => setError(err.message));
     };
 
     const getCandidacies = () => {
@@ -87,11 +93,10 @@ export const CandidaciesProvider = ({ children }: Props) => {
         
     }, [allCompanies]);
 
-    console.log('~> ', allCompanies); //REMOVE
-
     const propsValues = {
         allCandidacies,
         allCompanies,
+        error,
         createCandidacy,
     };
 

@@ -3,6 +3,7 @@ import { ECandidacyRemote, ECandidacyStatus } from "../utils";
 export interface ICandidaciesProviderProps {
     allCandidacies: ICandidacy[];
     allCompanies: ICompany[];
+    error: string;
     createCandidacy: (candidacy: INewCandidacy) => void;
 }
 

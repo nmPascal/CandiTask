@@ -25,7 +25,7 @@ import AddHomeWorkIcon from '@mui/icons-material/AddHomeWork';
 
 // TODO: useMediaQuery
 export const NewCandidacy: FC = (): JSX.Element => {
-    const { createCandidacy } = useCandidaciesContext();
+    const { error, createCandidacy } = useCandidaciesContext();
     const [remoteValue, setRemoteValue] = useState<ECandidacyRemote | null>(null);
     const [statusValue, setStatusValue] = useState<ECandidacyStatus | null>(null);
 
@@ -176,6 +176,7 @@ export const NewCandidacy: FC = (): JSX.Element => {
                     Create
                 </Button>
             </Box>
+            {error && <Typography color="error" sx={{textAlign: "center", mt: 2}}>{error}</Typography>}
         </Paper>
     );
 };
