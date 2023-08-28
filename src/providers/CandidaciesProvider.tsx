@@ -124,6 +124,8 @@ export const CandidaciesProvider = ({ children }: Props) => {
 
     useEffect(() => {
         setAllCompanies(composeCompanyData(allCandidacies));
+        if (!allCandidacies.length) return;
+        setSelectedCandidacy(allCandidacies[0]);
     }, [allCandidacies]);
 
     const propsValues = {
