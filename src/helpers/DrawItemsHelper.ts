@@ -12,14 +12,15 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
 import LanguageIcon from '@mui/icons-material/Language';
 import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { Overview } from '../components/Overview/Overview';
-import { NewCandidacy } from "../components";
+
+// components
+import { Overview, NewCandidacy, Candidacies } from '../components';
 
 export const DrawerItemsHelper: IDrawerItemsHelperProps = {
     primary: [
         { name: "Overview", icon: DashboardIcon, component: Overview  },
         { name: "Add candidacy", icon: AddHomeWorkIcon, component: NewCandidacy },
-        { name: "Candidacies", icon: ContentPasteSearchIcon, component: Overview },
+        { name: "Candidacies", icon: ContentPasteSearchIcon, component: Candidacies },
         { name: "Companies", icon: ApartmentIcon, component: Overview },
         { name: "Job boards", icon: LanguageIcon, component: Overview }
     ],

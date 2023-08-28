@@ -1,10 +1,10 @@
 import { FC } from 'react';
 
 // providers
-import { useAppContext, useDashboardContext } from '../providers';
+import { useAppContext, useDashboardContext } from '../../providers';
 
 // utils
-import { drawerWidth } from "../utils";
+import { drawerWidth } from "../../utils";
 
 // packages
 import {

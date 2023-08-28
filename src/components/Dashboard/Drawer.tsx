@@ -1,13 +1,13 @@
 import { FC } from "react";
 
 // providers
-import { useDashboardContext } from "../providers";
+import { useDashboardContext } from "../../providers";
 
 // helpers
-import { DrawerItemsHelper } from "../helpers";
+import { DrawerItemsHelper } from "../../helpers";
 
 // utils
-import { EDrawerItems, drawerWidth } from "../utils";
+import { EDrawerItems, drawerWidth } from "../../utils";
 
 // packages
 import {

@@ -1,10 +1,10 @@
 import { FC, FormEvent, useState } from 'react';
 
 // providers
-import { useAppContext, useCandidaciesContext } from '../providers';
+import { useAppContext, useCandidaciesContext } from '../../providers';
 
 // utils
-import { ECandidacyRemote, ECandidacyStatus } from '../utils';
+import { ECandidacyRemote, ECandidacyStatus } from '../../utils';
 
 // packages
 import {
