@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 // providers
-import { useCandidaciesContext } from "../../providers";
+import { useAppContext, useCandidaciesContext } from "../../providers";
 
 // helpers
 import { getAppointedCandidacies } from "../../helpers";
@@ -15,16 +15,12 @@ import {
     TableHead,
     TableRow,
     Typography,
-    useMediaQuery,
-    useTheme
 } from "@mui/material";
 
 export const Appointments: FC = (): JSX.Element => {
     const { allCandidacies } = useCandidaciesContext();
+    const { isMobile } = useAppContext(); 
     const appointments = getAppointedCandidacies(allCandidacies);
-
-    const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
     return (
         <>

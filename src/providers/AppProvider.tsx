@@ -2,28 +2,34 @@
 import { ReactNode, createContext, useContext, useState } from "react";
 
 // interfaces
-import { IAppThemeProviderProps } from "../interfaces";
+import { IAppProviderProps } from "../interfaces";
 
 // utils
 import { EThemeMode } from "../utils";
 
 // packages
-import { ThemeProvider, createTheme } from "@mui/material";
+import { ThemeProvider, createTheme, useMediaQuery, useTheme } from "@mui/material";
 
 type Props = {
     children: ReactNode;
 };
 
-const AppThemeContext = createContext<IAppThemeProviderProps>({
+const AppContext = createContext<IAppProviderProps>({
+    isMobile: false,
+    isTablet: false,
     toggleThemeMode: () => { },
 });
 
-export const useAppThemeContext = () => useContext(AppThemeContext);
+export const useAppContext = () => useContext(AppContext);
 
-export const AppThemeProvider = ({ children }: Props) => {
+export const AppProvider = ({ children }: Props) => {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+    const isTablet = useMediaQuery(theme.breakpoints.down("md"));
+    
     const [themeMode, setThemeMode] = useState<EThemeMode>(EThemeMode.DARK);
 
-    const theme = createTheme({
+    const themeConfig = createTheme({
         palette: {
             mode: themeMode,
             primary: {
@@ -41,13 +47,17 @@ export const AppThemeProvider = ({ children }: Props) => {
         );
     };
 
-    const propsValues = { toggleThemeMode };
+    const propsValues = {
+        isMobile,
+        isTablet,
+        toggleThemeMode,
+    };
 
     return (
-        <AppThemeContext.Provider value={propsValues}>
-            <ThemeProvider theme={theme}>
+        <AppContext.Provider value={propsValues}>
+            <ThemeProvider theme={themeConfig}>
                 {children}
             </ThemeProvider>
-        </AppThemeContext.Provider>
+        </AppContext.Provider>
     );
 };

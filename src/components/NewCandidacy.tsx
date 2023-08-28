@@ -1,7 +1,7 @@
 import { FC, FormEvent, useState } from 'react';
 
 // providers
-import { useCandidaciesContext } from '../providers';
+import { useAppContext, useCandidaciesContext } from '../providers';
 
 // utils
 import { ECandidacyRemote, ECandidacyStatus } from '../utils';
@@ -20,19 +20,15 @@ import {
     Select,
     TextField,
     Typography,
-    useMediaQuery,
-    useTheme
 } from '@mui/material';
 import AddHomeWorkIcon from '@mui/icons-material/AddHomeWork';
 
 export const NewCandidacy: FC = (): JSX.Element => {
+    const { isTablet } = useAppContext();
     const { error, createCandidacy } = useCandidaciesContext();
     
     const [remoteValue, setRemoteValue] = useState<ECandidacyRemote | null>(null);
     const [statusValue, setStatusValue] = useState<ECandidacyStatus | null>(null);
-
-    const theme = useTheme();
-    const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
     const _handleSubmit = (ev: FormEvent<HTMLFormElement>) => {
         ev.preventDefault();
@@ -56,7 +52,7 @@ export const NewCandidacy: FC = (): JSX.Element => {
     };
 
     return (
-        <Paper sx={{ py: 5, px: isSmallScreen ? 2 : 20 }}>
+        <Paper sx={{ py: 5, px: isTablet ? 2 : 20 }}>
             <CssBaseline />
             <Box
                 sx={{
@@ -76,10 +72,10 @@ export const NewCandidacy: FC = (): JSX.Element => {
                 component="form"
                 noValidate
                 onSubmit={(ev) => _handleSubmit(ev)}
-                sx={{ mt: isSmallScreen ? 1 : 3 }}
+                sx={{ mt: isTablet ? 1 : 3 }}
             >
                 <Grid container spacing={2}>
-                    <Grid item xs={12} sm={isSmallScreen ? 12 : 6}>
+                    <Grid item xs={12} sm={isTablet ? 12 : 6}>
                         <TextField
                             id="position"
                             name="position"
@@ -90,7 +86,7 @@ export const NewCandidacy: FC = (): JSX.Element => {
                             required
                         />
                     </Grid>
-                    <Grid item xs={12} sm={isSmallScreen ? 12 : 6}>
+                    <Grid item xs={12} sm={isTablet ? 12 : 6}>
                         <TextField
                             id="company"
                             name="company"
@@ -100,7 +96,7 @@ export const NewCandidacy: FC = (): JSX.Element => {
                             required
                         />
                     </Grid>
-                    <Grid item xs={isSmallScreen ? 12 : 6}>
+                    <Grid item xs={isTablet ? 12 : 6}>
                         <TextField
                             id="country"
                             name="country"
@@ -110,7 +106,7 @@ export const NewCandidacy: FC = (): JSX.Element => {
                             required
                         />
                     </Grid>
-                    <Grid item xs={isSmallScreen ? 12 : 6}>
+                    <Grid item xs={isTablet ? 12 : 6}>
                         <TextField
                             id="location"
                             name="location"
@@ -176,7 +172,7 @@ export const NewCandidacy: FC = (): JSX.Element => {
                     type="submit"
                     fullWidth
                     variant="contained"
-                    sx={{ mt: isSmallScreen ? 3 : 5, mb: 2 }}
+                    sx={{ mt: isTablet ? 3 : 5, mb: 2 }}
                 >
                     Create
                 </Button>

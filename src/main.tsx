@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 // providers
-import { UserProvider, AppThemeProvider, DashboardProvider, CandidaciesProvider } from "./providers";
+import { UserProvider, AppProvider, DashboardProvider, CandidaciesProvider } from "./providers";
 
 // components
 import App from "./App.tsx";
@@ -12,14 +12,14 @@ import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
-        <UserProvider>
-            <AppThemeProvider>
-                <DashboardProvider>
-                    <CandidaciesProvider>
-                            <App />
-                    </CandidaciesProvider>
-                </DashboardProvider>
-            </AppThemeProvider>
-        </UserProvider>
+        <AppProvider>
+            <UserProvider>
+                    <DashboardProvider>
+                        <CandidaciesProvider>
+                                <App />
+                        </CandidaciesProvider>
+                    </DashboardProvider>
+            </UserProvider>
+        </AppProvider>
     </React.StrictMode>
 );

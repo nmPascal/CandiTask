@@ -47,11 +47,16 @@ const StyledDynamicDrawer = styled(MuiDrawer, {
                 width: theme.spacing(9),
             },
         }),
+        ...(open && {
+            [theme.breakpoints.down("sm")]: {
+                width: "100%", // Set drawer width to 100% for mobile screens when open
+            },
+        }),
     },
 }));
 
 export const Drawer: FC = (): JSX.Element => {
-    const { drawerIsOpen, toggleDrawer, setCurrentTab } = useDashboardContext();
+    const { drawerIsOpen, currentTab, toggleDrawer, setCurrentTab } = useDashboardContext();
 
     return (
         <StyledDynamicDrawer variant="permanent" open={drawerIsOpen}>
@@ -70,7 +75,7 @@ export const Drawer: FC = (): JSX.Element => {
             <Divider />
             <List component="nav">
                 {DrawerItemsHelper.getItems(EDrawerItems.PRIMARY).map((item, idx) => (
-                    <ListItemButton key={idx} onClick={() => setCurrentTab(item)}>
+                    <ListItemButton key={idx} onClick={() => setCurrentTab(item)} selected={currentTab.name === item.name}>
                         <ListItemIcon>
                             <item.icon />
                         </ListItemIcon>
@@ -82,7 +87,7 @@ export const Drawer: FC = (): JSX.Element => {
                     User Account
                 </ListSubheader>
                 {DrawerItemsHelper.getItems(EDrawerItems.SECONDARY).map((item, idx) => (
-                    <ListItemButton key={idx} onClick={() => setCurrentTab(item)}>
+                    <ListItemButton key={idx} onClick={() => setCurrentTab(item)} selected={currentTab.name === item.name}>
                         <ListItemIcon>
                             <item.icon />
                         </ListItemIcon>
