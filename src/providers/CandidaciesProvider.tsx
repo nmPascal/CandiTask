@@ -123,13 +123,8 @@ export const CandidaciesProvider = ({ children }: Props) => {
     }, [user]);
 
     useEffect(() => {
-        if (!allCandidacies.length) return;
         setAllCompanies(composeCompanyData(allCandidacies));
     }, [allCandidacies]);
-
-    useEffect(() => {
-        
-    }, [allCompanies]);
 
     const propsValues = {
         allCandidacies,
