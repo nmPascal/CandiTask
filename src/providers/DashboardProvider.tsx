@@ -3,13 +3,20 @@ import {
     ReactNode,
     createContext,
     useContext,
+    useEffect,
     useState,
 } from "react";
+// providers
+import { useAppContext } from ".";
+
+// helpers
+import { DrawerItemsHelper } from "../helpers";
+
+// utils
+import { EDrawerItems } from "../utils";
 
 // interfaces
 import { IDashboardProviderProps, IDrawerItem } from "../interfaces";
-import { DrawerItemsHelper } from "../helpers";
-import { EDrawerItems } from "../utils";
 
 type Props = {
     children: ReactNode;
@@ -25,7 +32,8 @@ const DashboardContext = createContext<IDashboardProviderProps>({
 export const useDashboardContext = () => useContext(DashboardContext);
 
 export const DashboardProvider = ({ children }: Props) => {
-    const [drawerIsOpen, setDrawerIsOpen] = useState<boolean>(true);
+    const { isMobile, isTablet } = useAppContext();
+    const [drawerIsOpen, setDrawerIsOpen] = useState<boolean>(false);
     const [currentTab, setCurrentTab] = useState<IDrawerItem>(
         DrawerItemsHelper.getItems(EDrawerItems.PRIMARY)[0]
     );
@@ -33,6 +41,10 @@ export const DashboardProvider = ({ children }: Props) => {
     const toggleDrawer = () => {
         setDrawerIsOpen(!drawerIsOpen);
     };
+
+    useEffect(() => {
+        setDrawerIsOpen(!isMobile && !isTablet);
+    }, [isMobile, isTablet]);
 
     const propsValues = {
         drawerIsOpen,

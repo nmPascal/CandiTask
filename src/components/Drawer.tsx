@@ -47,11 +47,6 @@ const StyledDynamicDrawer = styled(MuiDrawer, {
                 width: theme.spacing(9),
             },
         }),
-        ...(open && {
-            [theme.breakpoints.down("sm")]: {
-                width: "100%", // Set drawer width to 100% for mobile screens when open
-            },
-        }),
     },
 }));
 

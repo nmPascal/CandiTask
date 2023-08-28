@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 // providers
-import { useDashboardContext } from '../providers';
+import { useAppContext, useDashboardContext } from '../providers';
 
 // utils
 import { drawerWidth } from "../utils";
@@ -41,6 +41,7 @@ const StyledDynamicAppBar = styled(MuiAppBar, {
 }));
 
 export const AppBar: FC = (): JSX.Element => {
+    const { isTablet } = useAppContext();
     const { drawerIsOpen, currentTab, toggleDrawer } = useDashboardContext();
 
     return (
@@ -50,18 +51,20 @@ export const AppBar: FC = (): JSX.Element => {
                     pr: "24px",
                 }}
             >
-                <IconButton
-                    edge="start"
-                    color="inherit"
-                    aria-label="open drawer"
-                    onClick={toggleDrawer}
-                    sx={{
-                        marginRight: "36px",
-                        ...(drawerIsOpen && { display: "none" }),
-                    }}
-                >
-                    <MenuIcon />
-                </IconButton>
+                {!isTablet && (
+                    <IconButton
+                        edge="start"
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={toggleDrawer}
+                        sx={{
+                            marginRight: "36px",
+                            ...(drawerIsOpen && { display: "none" }),
+                        }}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                )}
                 <Typography
                     component="h1"
                     variant="h6"
