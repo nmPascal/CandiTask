@@ -19,7 +19,9 @@ import {
     Paper,
     Select,
     TextField,
-    Typography
+    Typography,
+    useMediaQuery,
+    useTheme
 } from '@mui/material';
 import AddHomeWorkIcon from '@mui/icons-material/AddHomeWork';
 
@@ -28,6 +30,9 @@ export const NewCandidacy: FC = (): JSX.Element => {
     const { error, createCandidacy } = useCandidaciesContext();
     const [remoteValue, setRemoteValue] = useState<ECandidacyRemote | null>(null);
     const [statusValue, setStatusValue] = useState<ECandidacyStatus | null>(null);
+
+    const theme = useTheme();
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 
     const _handleSubmit = (ev: FormEvent<HTMLFormElement>) => {
         ev.preventDefault();
@@ -51,7 +56,7 @@ export const NewCandidacy: FC = (): JSX.Element => {
     };
 
     return (
-        <Paper sx={{py: 5, px: 20}}>
+        <Paper sx={{ py: 5, px: isSmallScreen ? 2 : 20 }}>
             <CssBaseline />
             <Box
                 sx={{
@@ -71,10 +76,10 @@ export const NewCandidacy: FC = (): JSX.Element => {
                 component="form"
                 noValidate
                 onSubmit={(ev) => _handleSubmit(ev)}
-                sx={{ mt: 3 }}
+                sx={{ mt: isSmallScreen ? 1 : 3 }}
             >
                 <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={isSmallScreen ? 12 : 6}>
                         <TextField
                             id="position"
                             name="position"
@@ -85,7 +90,7 @@ export const NewCandidacy: FC = (): JSX.Element => {
                             required
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={isSmallScreen ? 12 : 6}>
                         <TextField
                             id="company"
                             name="company"
@@ -95,7 +100,7 @@ export const NewCandidacy: FC = (): JSX.Element => {
                             required
                         />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={isSmallScreen ? 12 : 6}>
                         <TextField
                             id="country"
                             name="country"
@@ -105,7 +110,7 @@ export const NewCandidacy: FC = (): JSX.Element => {
                             required
                         />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={isSmallScreen ? 12 : 6}>
                         <TextField
                             id="location"
                             name="location"
@@ -171,7 +176,7 @@ export const NewCandidacy: FC = (): JSX.Element => {
                     type="submit"
                     fullWidth
                     variant="contained"
-                    sx={{ mt: 5, mb: 2 }}
+                    sx={{ mt: isSmallScreen ? 3 : 5, mb: 2 }}
                 >
                     Create
                 </Button>
