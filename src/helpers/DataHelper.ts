@@ -61,21 +61,27 @@ export const getStatusColor = (status: ECandidacyStatus): string => {
     }
 };
 
-export const composeStatusChart = (candidacies: ICandidacy[]): IStatusChart[] => {
-    const totalCandidacies = candidacies.length;
-    const statusPercentages: Record<ECandidacyStatus, number> = {
+
+export const composeStatusChart = (candidacies: ICandidacy[] | ICandidacy): IStatusChart[] => {
+    const statusCount: Record<ECandidacyStatus, number> = {
         [ECandidacyStatus.DONE]: 0,
         [ECandidacyStatus.PENDING]: 0,
         [ECandidacyStatus.REJECTED]: 0,
     };
 
-    candidacies.forEach((candidacy) => {
-        statusPercentages[candidacy.status] += 1;
-    });
+    if (Array.isArray(candidacies)) {
+        candidacies.forEach((candidacy) => {
+            statusCount[candidacy.status] += 1;
+        });
+    } else {
+        statusCount[candidacies.status] = 1;
+    }
 
-    return Object.keys(statusPercentages).map((status) => {
+    const filteredStatuses = Object.keys(statusCount).filter((status) => statusCount[status as ECandidacyStatus] > 0);
+
+    return filteredStatuses.map((status) => {
         const name = `${status.charAt(0).toUpperCase()}${status.slice(1)}` as ECandidacyStatus;
-        const value = (statusPercentages[status as ECandidacyStatus] / totalCandidacies) * 100;
+        const value = (statusCount[status as ECandidacyStatus] / (Array.isArray(candidacies) ? candidacies.length : 1)) * 100;
         const color = getStatusColor(status as ECandidacyStatus);
         return { name, value, color };
     });
