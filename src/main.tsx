@@ -9,6 +9,7 @@ import App from "./App.tsx";
 
 // styles
 import "./index.css";
+import { CssBaseline } from "@mui/material";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
@@ -16,6 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <UserProvider>
                     <DashboardProvider>
                         <CandidaciesProvider>
+                                <CssBaseline />
                                 <App />
                         </CandidaciesProvider>
                     </DashboardProvider>

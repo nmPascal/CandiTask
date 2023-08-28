@@ -22,8 +22,10 @@ type Props = {
 
 const CandidaciesContext = createContext<ICandidaciesProviderProps>({
     allCandidacies: [],
+    selectedCandidacy: null,
     allCompanies: [],
     error: "",
+    setSelectedCandidacy: () => { },
     createCandidacy: () => { },
 });
 
@@ -37,6 +39,7 @@ export const CandidaciesProvider = ({ children }: Props) => {
     const databases = new Databases(client);
 
     const [allCandidacies, setAllCandidacies] = useState<ICandidacy[]>([]);
+    const [selectedCandidacy, setSelectedCandidacy] = useState<ICandidacy | null>(null);
     const [allCompanies, setAllCompanies] = useState<ICompany[]>([]);
     const [error, setError] = useState<string>("");
 
@@ -95,8 +98,10 @@ export const CandidaciesProvider = ({ children }: Props) => {
 
     const propsValues = {
         allCandidacies,
+        selectedCandidacy,
         allCompanies,
         error,
+        setSelectedCandidacy,
         createCandidacy,
     };
 

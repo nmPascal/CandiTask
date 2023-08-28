@@ -2,8 +2,10 @@ import { ECandidacyRemote, ECandidacyStatus } from "../utils";
 
 export interface ICandidaciesProviderProps {
     allCandidacies: ICandidacy[];
+    selectedCandidacy: ICandidacy | null;
     allCompanies: ICompany[];
     error: string;
+    setSelectedCandidacy: (candidacy: ICandidacy) => void;
     createCandidacy: (candidacy: INewCandidacy) => void;
 }
 

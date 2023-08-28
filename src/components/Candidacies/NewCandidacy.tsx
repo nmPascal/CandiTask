@@ -11,7 +11,6 @@ import {
     Avatar,
     Box,
     Button,
-    CssBaseline,
     FormControl,
     Grid,
     InputLabel,
@@ -52,8 +51,16 @@ export const NewCandidacy: FC = (): JSX.Element => {
     };
 
     return (
-        <Paper sx={{ py: 5, px: isTablet ? 2 : 20 }}>
-            <CssBaseline />
+        <Paper
+            sx={{
+                p: 2,
+                display: "flex",
+                flexDirection: "column",
+            }}
+        >
+            <Typography component="h2" variant="h6" color="primary" gutterBottom>
+                New Candidacy
+            </Typography>
             <Box
                 sx={{
                     display: "flex",
@@ -61,18 +68,20 @@ export const NewCandidacy: FC = (): JSX.Element => {
                     alignItems: "center",
                 }}
             >
-                <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+                <Avatar sx={{
+                    m: 1,
+                    bgcolor: "secondary.main",
+                    width: 56,
+                    height: 56 
+                }}>
                     <AddHomeWorkIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">
-                    New Candidacy
-                </Typography>
             </Box>
             <Box
                 component="form"
                 noValidate
                 onSubmit={(ev) => _handleSubmit(ev)}
-                sx={{ mt: isTablet ? 1 : 3 }}
+                sx={{ mt: isTablet ? 1 : 3, px: isTablet ? 1 : 20 }}
             >
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={isTablet ? 12 : 6}>

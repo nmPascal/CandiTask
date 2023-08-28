@@ -7,7 +7,6 @@ import { useUserContext } from "../../providers";
 import {
     Avatar,
     Button,
-    CssBaseline,
     Grid,
     Box,
     Typography,
@@ -47,7 +46,6 @@ export const AuthForm: FC = (): JSX.Element => {
 
     return (
         <Container component="main" maxWidth="xs">
-            <CssBaseline />
             <Box
                 sx={{
                     mt: 8,

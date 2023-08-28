@@ -12,14 +12,12 @@ import Container from "@mui/material/Container";
 import { Copyright } from "../Copyright";
 import { AppBar } from "./AppBar";
 import { Drawer } from "./Drawer";
-import { CssBaseline } from "@mui/material";
 
 export const Dashboard: FC = (): JSX.Element => {
     const { currentTab } = useDashboardContext();
 
     return (
         <Box sx={{ display: "flex" }}>
-            <CssBaseline />
             <AppBar />
             <Drawer />
             <Box
