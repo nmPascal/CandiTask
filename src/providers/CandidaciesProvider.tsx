@@ -2,16 +2,21 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 
 // providers
-import { useUserContext } from "../providers";
+import { useUserContext, useDashboardContext } from "../providers";
 
 // helpers
-import { composeCompanyData, transformDocumentsToCandidacies } from "../helpers";
+import { DrawerItemsHelper, composeCompanyData, transformDocumentsToCandidacies } from "../helpers";
 
 // interfaces
-import { ICandidaciesProviderProps, ICandidacy, ICompany, INewCandidacy } from "../interfaces";
+import {
+    ICandidaciesProviderProps,
+    ICandidacy,
+    ICompany,
+    INewCandidacy
+} from "../interfaces";
 
 // utils
-import { client } from "../utils";
+import { EDrawerItems, client } from "../utils";
 
 // packages
 import { Databases, ID } from "appwrite";
@@ -37,6 +42,7 @@ const COLLECTION_ID = import.meta.env.VITE_APPWRITE_COLLECTION_ID;
 
 export const CandidaciesProvider = ({ children }: Props) => {
     const { user } = useUserContext();
+    const { setCurrentTab } = useDashboardContext();
     const databases = new Databases(client);
 
     const [allCandidacies, setAllCandidacies] = useState<ICandidacy[]>([]);
@@ -67,6 +73,7 @@ export const CandidaciesProvider = ({ children }: Props) => {
 
         promise.then(() => {
             getCandidacies();
+            setCurrentTab(DrawerItemsHelper.getItems(EDrawerItems.PRIMARY)[0]);
         }, (err) => setError(err.message));
     };
 
