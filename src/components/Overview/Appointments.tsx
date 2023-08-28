@@ -61,13 +61,6 @@ export const Appointments: FC = (): JSX.Element => {
                     </TableBody>
                 </Table>
             ) : <Typography variant="body2" color="text.secondary" align="center">No appointments yet</Typography>}
-            <Link
-                color="primary"
-                href="#"
-                sx={{ mt: 3 }}
-            >
-                See all candidacies
-            </Link>
         </>
     );
 };

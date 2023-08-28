@@ -9,6 +9,8 @@ import { CurrentCandidacy } from './CurrentCandidacy';
 
 export const Candidacies: FC = (): JSX.Element => {
 
+    // TODO: useMediaQuery 
+
     return (
         <Grid container spacing={3}>
             <Grid item xs={12} lg={6}>

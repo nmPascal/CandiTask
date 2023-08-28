@@ -12,6 +12,7 @@ export interface ICandidaciesProviderProps {
 
 type OmitKeys<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
+// TODO: add company website
 export interface ICandidacy {
     id: string;
     uid: string;

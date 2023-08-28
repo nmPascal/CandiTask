@@ -14,14 +14,14 @@ import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
 
 // components
-import { Overview, NewCandidacy, Candidacies } from '../components';
+import { Overview, NewCandidacy, Candidacies, CompanyList } from '../components';
 
 export const DrawerItemsHelper: IDrawerItemsHelperProps = {
     primary: [
         { name: "Overview", icon: DashboardIcon, component: Overview  },
         { name: "Add candidacy", icon: AddHomeWorkIcon, component: NewCandidacy },
         { name: "Candidacies", icon: ContentPasteSearchIcon, component: Candidacies },
-        { name: "Companies", icon: ApartmentIcon, component: Overview },
+        { name: "Companies", icon: ApartmentIcon, component: CompanyList },
         { name: "Job boards", icon: LanguageIcon, component: Overview }
     ],
     secondary: [

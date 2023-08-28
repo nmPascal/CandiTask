@@ -4,3 +4,4 @@ export * from "./Dashboard/Dashboard";
 export * from "./Overview/Overview";
 export * from "./Candidacies/NewCandidacy";
 export * from "./Candidacies/Candidacies";
+export * from "./Companies/CompanyList";
