@@ -64,7 +64,7 @@ export const CandidaciesProvider = ({ children }: Props) => {
 
         promise.then((res) => {
             const { documents } = res;
-            setAllCandidacies(transformDocumentsToCandidacies(documents));
+            setAllCandidacies(transformDocumentsToCandidacies(documents, user.userId));
         }, (err) => console.log("~> err", err));
     };
 
@@ -81,8 +81,13 @@ export const CandidaciesProvider = ({ children }: Props) => {
     useEffect(() => {
         if (!allCandidacies.length) return;
         setAllCompanies(composeCompanyData(allCandidacies));
-        //FIXME: Appointments component call new data but not PopularCompanies
     }, [allCandidacies]);
+
+    useEffect(() => {
+        
+    }, [allCompanies]);
+
+    console.log('~> ', allCompanies); //REMOVE
 
     const propsValues = {
         allCandidacies,

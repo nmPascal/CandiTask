@@ -35,7 +35,7 @@ export const PopularCompanies: FC = (): JSX.Element => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {popularCompanies.map((row, idx) => (
+                        {popularCompanies.sort((a, b) => b.totalCandidacies - a.totalCandidacies).map((row, idx) => (
                             <TableRow key={idx}>
                                 <TableCell>{row.name}</TableCell>
                                 <TableCell align="right">{row.totalCandidacies}</TableCell>

@@ -7,9 +7,9 @@ import { ECandidacyStatus } from "../utils";
 // packages
 import { Models } from "appwrite";
 
-export const transformDocumentsToCandidacies = (documents: Models.Document[]): ICandidacy[] => {
-    console.log('~> ', documents); //REMOVE
+export const transformDocumentsToCandidacies = (documents: Models.Document[], uid: string): ICandidacy[] => {
     return documents.map((doc) => ({
+        uid,
         id: doc.$id,
         company: doc.company,
         country: doc.country,
@@ -43,9 +43,8 @@ export const composeCompanyData = (candidacies: ICandidacy[]): ICompany[] => {
     return Object.values(companies);
 };
 
-// get the 4 most popular companies based on the number of candidacies
 export const getPopularCompanies = (companies: ICompany[]): ICompany[] => {
-    return companies.sort((a, b) => b.location.localeCompare(a.location)).slice(0, 3);
+    return companies.sort((a, b) => b.totalCandidacies - a.totalCandidacies).slice(0, 3);
 };
 
 const _getStatusColor = (status: ECandidacyStatus): string => {
