@@ -27,6 +27,7 @@ const CandidaciesContext = createContext<ICandidaciesProviderProps>({
     error: "",
     setSelectedCandidacy: () => { },
     createCandidacy: () => { },
+    deleteCandidacy: () => { },
 });
 
 export const useCandidaciesContext = () => useContext(CandidaciesContext);
@@ -43,6 +44,11 @@ export const CandidaciesProvider = ({ children }: Props) => {
     const [allCompanies, setAllCompanies] = useState<ICompany[]>([]);
     const [error, setError] = useState<string>("");
 
+    /**
+     * Create candidacy
+     * @param newCandidacy
+     * @returns void
+     */
     const createCandidacy = (newCandidacy: INewCandidacy) => {
         if (!user) return;
 
@@ -64,6 +70,10 @@ export const CandidaciesProvider = ({ children }: Props) => {
         }, (err) => setError(err.message));
     };
 
+    /**
+     * Get all candidacies
+     * @returns void
+     */
     const getCandidacies = () => {
         if (!user) return;
         const promise = databases.listDocuments(
@@ -74,6 +84,24 @@ export const CandidaciesProvider = ({ children }: Props) => {
         promise.then((res) => {
             const { documents } = res;
             setAllCandidacies(transformDocumentsToCandidacies(documents, user.userId));
+        }, (err) => console.log("~> err", err));
+    };
+
+    /**
+     * Delete candidacy
+     * @param id
+     * @returns void
+     */
+    const deleteCandidacy = (id: string) => {
+        const promise = databases.deleteDocument(
+            DATABASE_ID,
+            COLLECTION_ID,
+            id,
+        );
+
+        promise.then(() => {
+            setSelectedCandidacy(null);
+            getCandidacies();
         }, (err) => console.log("~> err", err));
     };
 
@@ -103,6 +131,7 @@ export const CandidaciesProvider = ({ children }: Props) => {
         error,
         setSelectedCandidacy,
         createCandidacy,
+        deleteCandidacy,
     };
 
     return (

@@ -15,6 +15,7 @@ export const transformDocumentsToCandidacies = (documents: Models.Document[], ui
         country: doc.country,
         location: doc.location,
         position: doc.position,
+        note: doc.note,
         url: doc.url,
         remote: doc.remote,
         salary: doc.salary,
@@ -47,7 +48,7 @@ export const getPopularCompanies = (companies: ICompany[]): ICompany[] => {
     return companies.sort((a, b) => b.totalCandidacies - a.totalCandidacies).slice(0, 3);
 };
 
-const _getStatusColor = (status: ECandidacyStatus): string => {
+export const getStatusColor = (status: ECandidacyStatus): string => {
     switch (status) {
         case ECandidacyStatus.DONE:
             return "#08CC77";
@@ -75,7 +76,7 @@ export const composeStatusChart = (candidacies: ICandidacy[]): IStatusChart[] =>
     return Object.keys(statusPercentages).map((status) => {
         const name = `${status.charAt(0).toUpperCase()}${status.slice(1)}` as ECandidacyStatus;
         const value = (statusPercentages[status as ECandidacyStatus] / totalCandidacies) * 100;
-        const color = _getStatusColor(status as ECandidacyStatus);
+        const color = getStatusColor(status as ECandidacyStatus);
         return { name, value, color };
     });
 };
