@@ -27,6 +27,7 @@ import AddHomeWorkIcon from '@mui/icons-material/AddHomeWork';
 
 export const NewCandidacy: FC = (): JSX.Element => {
     const { error, createCandidacy } = useCandidaciesContext();
+    
     const [remoteValue, setRemoteValue] = useState<ECandidacyRemote | null>(null);
     const [statusValue, setStatusValue] = useState<ECandidacyStatus | null>(null);
 
