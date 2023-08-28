@@ -14,12 +14,17 @@ import {
     TableCell,
     TableHead,
     TableRow,
-    Typography
+    Typography,
+    useMediaQuery,
+    useTheme
 } from "@mui/material";
 
 export const Appointments: FC = (): JSX.Element => {
     const { allCandidacies } = useCandidaciesContext();
     const appointments = getAppointedCandidacies(allCandidacies);
+
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
     return (
         <>
@@ -30,18 +35,26 @@ export const Appointments: FC = (): JSX.Element => {
                 <Table size="small">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Position</TableCell>
                             <TableCell>Company</TableCell>
-                            <TableCell>Remote</TableCell>
+                            {!isMobile && (
+                                <>
+                                    <TableCell>Position</TableCell>
+                                    <TableCell>Remote</TableCell>
+                                </>
+                            )}
                             <TableCell align="right">Link</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {appointments.map((row) => (
                             <TableRow key={row.id} style={{height: "50px"}}>
-                                <TableCell>{row.position}</TableCell>
                                 <TableCell>{row.company}</TableCell>
-                                <TableCell>{row.remote}</TableCell>
+                                {!isMobile && (
+                                    <>
+                                        <TableCell>{row.position}</TableCell>
+                                        <TableCell>{row.remote}</TableCell>
+                                    </>
+                                )}
                                 <TableCell align="right">
                                     <Link href={row.url} target="_blank">
                                         Show

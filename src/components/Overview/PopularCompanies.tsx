@@ -19,7 +19,6 @@ import {
 export const PopularCompanies: FC = (): JSX.Element => {
     const { allCompanies } = useCandidaciesContext();
     const popularCompanies = getPopularCompanies(allCompanies);
-    // TODO: useMediaQuery on Lists
 
     return (
        <>
