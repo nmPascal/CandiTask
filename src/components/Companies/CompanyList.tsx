@@ -1,5 +1,8 @@
 import { FC } from 'react';
 
+// providers
+import { useAppContext, useCandidaciesContext } from '../../providers';
+
 // packages
 import {
     Paper,
@@ -10,7 +13,6 @@ import {
     TableRow,
     Typography
 } from '@mui/material';
-import { useAppContext, useCandidaciesContext } from '../../providers';
 
 export const CompanyList: FC = (): JSX.Element => {
     const { allCompanies } = useCandidaciesContext();
@@ -37,7 +39,7 @@ export const CompanyList: FC = (): JSX.Element => {
                                     <TableCell>Location</TableCell>
                                 </>
                             )}
-                            <TableCell align="right">totalCandidacies</TableCell>
+                            <TableCell align="right">Candidacies</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

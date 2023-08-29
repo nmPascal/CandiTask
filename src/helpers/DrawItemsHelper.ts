@@ -14,7 +14,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
 
 // components
-import { Overview, NewCandidacy, Candidacies, CompanyList } from '../components';
+import { Overview, NewCandidacy, Candidacies, CompanyList, JobBoardList } from '../components';
 
 export const DrawerItemsHelper: IDrawerItemsHelperProps = {
     primary: [
@@ -22,7 +22,7 @@ export const DrawerItemsHelper: IDrawerItemsHelperProps = {
         { name: "Add candidacy", icon: AddHomeWorkIcon, component: NewCandidacy },
         { name: "Candidacies", icon: ContentPasteSearchIcon, component: Candidacies },
         { name: "Companies", icon: ApartmentIcon, component: CompanyList },
-        { name: "Job boards", icon: LanguageIcon, component: Overview }
+        { name: "Job boards", icon: LanguageIcon, component: JobBoardList }
     ],
     secondary: [
         { name: "Profile", icon: PersonIcon, component: Overview },

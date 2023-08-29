@@ -18,7 +18,6 @@ export const StatusChart: React.FC = (): JSX.Element => {
     const segmentSize = 76;
     let currentAngle = -90;
 
-    console.log('~> ', statusChart); //REMOVE
     return (
         <div className="pieChart">
             {allCandidacies.length ? (
