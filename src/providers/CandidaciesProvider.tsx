@@ -75,8 +75,7 @@ export const CandidaciesProvider = ({ children }: Props) => {
             COLLECTION_ID,
         );
 
-        promise.then((res) => {
-            const { documents } = res;
+        promise.then(({ documents }) => {
             setAllCandidacies(transformDocumentsToCandidacies(documents, user.userId));
         }, (err) => console.log("~> err", err));
     };
