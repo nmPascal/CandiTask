@@ -77,7 +77,7 @@ export const UserProvider = ({ children }: Props) => {
         promise.then(() => {
             setUser(null);
             setFormType(EFormTypes.LOGIN);
-        }, (err) => setError(err.message));
+        }, (err) => console.error(err));
     };
 
     useEffect(() => {
