@@ -7,50 +7,53 @@ import {
     Checkbox,
     Grid,
 } from "@mui/material";
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles({
+    textField: {
+        "& input:-webkit-autofill, & input:-webkit-autofill:focus, & input:-webkit-autofill:hover, & input:-webkit-autofill:active":
+            {
+                "-webkit-box-shadow": "0 0 0 30px transparent !important",
+                "-webkit-text-fill-color": "white !important",
+            },
+    },
+});
 
 export const SignUp: FC = (): JSX.Element => {
+    const styles = useStyles();
+
     return (
         <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-                <TextField
-                    id="firstName"
-                    name="firstName"
-                    label="First Name"
-                    fullWidth
-                    autoComplete="given-name"
-                    autoFocus
-                />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-                <TextField
-                    id="lastName"
-                    name="lastName"
-                    label="Last Name"
-                    fullWidth
-                    autoComplete="family-name"
-                />
-            </Grid>
-            <Grid item xs={12}>
-                <TextField
-                    id="email"
-                    name="email"
-                    label="Email Address"
-                    required
-                    fullWidth
-                    autoComplete="email"
-                />
-            </Grid>
-            <Grid item xs={12}>
-                <TextField
-                    id="password"
-                    name="password"
-                    label="Password"
-                    required
-                    type="password"
-                    fullWidth
-                    autoComplete="new-password"
-                />
-            </Grid>
+            {...Array(["firstName", "lastName"].map((field, idx) => (
+                <Grid item xs={12} sm={6}>
+                    <TextField
+                        key={idx}
+                        id={field}
+                        name={field}
+                        label={`${field.charAt(0).toUpperCase()}${field
+                            .slice(1)
+                            .replace(/([A-Z])/g, " $1")}`}
+                        {...(idx === 0 && { autoFocus: true })}
+                        className={styles.textField}
+                        fullWidth
+                    />
+                </Grid>
+            )))}
+            {...Array(["email", "password"].map((field, idx) => (
+                <Grid item xs={12}>
+                    <TextField
+                        key={idx}
+                        id={field}
+                        name={field}
+                        label={`${field[0].toUpperCase()}${field.slice(1)}`}
+                        type={field}
+                        {...(idx === 0 && { autoFocus: true })}
+                        className={styles.textField}
+                        fullWidth
+                        required
+                    />
+                </Grid>
+            )))}
             <Grid item xs={12}>
                 <FormControlLabel
                     control={
