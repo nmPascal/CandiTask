@@ -4,8 +4,8 @@ import { FC } from 'react';
 import { Grid, Paper} from '@mui/material';
 
 // components
-import { CandidacyList } from './CandidacyList';
-import { CurrentCandidacy } from './CurrentCandidacy';
+import { ChosenCandidacy } from './CandidacyList';
+import { CurrentCandidacy } from './ChosenCandidacy';
 
 export const Candidacies: FC = (): JSX.Element => {
     return (
@@ -18,7 +18,7 @@ export const Candidacies: FC = (): JSX.Element => {
                         flexDirection: "column",
                     }}
                 >
-                    <CandidacyList />
+                    <ChosenCandidacy />
                 </Paper>
             </Grid>
             <Grid item xs={12} lg={6}>

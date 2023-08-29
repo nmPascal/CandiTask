@@ -17,8 +17,8 @@ import {
 } from '@mui/material';
 
 
-export const CandidacyList: FC = (): JSX.Element => {
-    const { allCandidacies, setSelectedCandidacy } = useCandidaciesContext();
+export const ChosenCandidacy: FC = (): JSX.Element => {
+    const { allCandidacies, setChosenCand } = useCandidaciesContext();
     const { isMobile } = useAppContext();
 
     return (
@@ -52,7 +52,7 @@ export const CandidacyList: FC = (): JSX.Element => {
                                     <TableCell align="right">
                                         <Button
                                             sx={{textTransform: 'none'}}
-                                            onClick={() => setSelectedCandidacy(row)}
+                                            onClick={() => setChosenCand(row)}
                                         >
                                             Details
                                         </Button>

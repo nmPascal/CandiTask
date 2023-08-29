@@ -24,3 +24,10 @@ export enum ECandidacyStatus {
     REJECTED = "rejected",
     DONE = "done",
 }
+
+export enum EEditData {
+    STATUS,
+    REMOTE,
+    SALARY,
+    NOTE
+}

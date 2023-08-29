@@ -2,11 +2,12 @@ import { ECandidacyRemote, ECandidacyStatus } from "../utils";
 
 export interface ICandidaciesProviderProps {
     allCandidacies: ICandidacy[];
-    selectedCandidacy: ICandidacy | null;
+    chosenCand: ICandidacy | null;
     allCompanies: ICompany[];
     error: string;
-    setSelectedCandidacy: (candidacy: ICandidacy) => void;
+    setChosenCand: (candidacy: ICandidacy) => void;
     createCandidacy: (candidacy: INewCandidacy) => void;
+    editCandidacy: (editedData: IEditCandidacy) => void;
     deleteCandidacy: (id: string) => void;
 }
 
@@ -29,7 +30,19 @@ export interface ICandidacy {
     updatedAt: string;
 }
 
-export type INewCandidacy = OmitKeys<ICandidacy, "id" |  "uid" | "createdAt" | "updatedAt" | "note">;
+export type INewCandidacy = OmitKeys<ICandidacy,"id" | "uid" | "note" | "createdAt" | "updatedAt">;
+
+export type IEditCandidacy = OmitKeys<
+    ICandidacy,
+    | "uid"
+    | "company"
+    | "country"
+    | "location"
+    | "position"
+    | "url"
+    | "createdAt"
+    | "updatedAt"
+>;
 
 export interface ICompany {
     name: string;

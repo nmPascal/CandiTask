@@ -1,19 +1,30 @@
 /* eslint-disable react-refresh/only-export-components */
-import { ReactNode, createContext, useContext, useEffect, useState } from "react";
+import {
+    ReactNode,
+    createContext,
+    useContext,
+    useEffect,
+    useState
+} from "react";
 
 // providers
 import { useUserContext, useDashboardContext } from "../providers";
-
-// helpers
-import { DrawerItemsHelper, composeCompanyData, transformDocumentsToCandidacies } from "../helpers";
 
 // interfaces
 import {
     ICandidaciesProviderProps,
     ICandidacy,
     ICompany,
+    IEditCandidacy,
     INewCandidacy
 } from "../interfaces";
+
+// helpers
+import {
+    DrawerItemsHelper,
+    composeCompanyData,
+    transformDocumentsToCandidacies
+} from "../helpers";
 
 // utils
 import { EDrawerItems, client } from "../utils";
@@ -27,11 +38,12 @@ type Props = {
 
 const CandidaciesContext = createContext<ICandidaciesProviderProps>({
     allCandidacies: [],
-    selectedCandidacy: null,
+    chosenCand: null,
     allCompanies: [],
     error: "",
-    setSelectedCandidacy: () => { },
+    setChosenCand: () => { },
     createCandidacy: () => { },
+    editCandidacy: () => { },
     deleteCandidacy: () => { },
 });
 
@@ -46,13 +58,13 @@ export const CandidaciesProvider = ({ children }: Props) => {
     const databases = new Databases(client);
 
     const [allCandidacies, setAllCandidacies] = useState<ICandidacy[]>([]);
-    const [selectedCandidacy, setSelectedCandidacy] = useState<ICandidacy | null>(null);
+    const [chosenCand, setChosenCand] = useState<ICandidacy | null>(null);
     const [allCompanies, setAllCompanies] = useState<ICompany[]>([]);
     const [error, setError] = useState<string>("");
 
     /**
      * Create candidacy
-     * @param newCandidacy
+     * @param INewCandidacy
      * @returns void
      */
     const createCandidacy = (newCandidacy: INewCandidacy) => {
@@ -95,8 +107,32 @@ export const CandidaciesProvider = ({ children }: Props) => {
     };
 
     /**
+     * Update candidacy
+     * @param IEditCandidacy
+     * @returns void
+     */
+    const editCandidacy = ({ id, ...rest }: IEditCandidacy) => {
+        if (!user) return;
+        const promise = databases.updateDocument(
+            DATABASE_ID,
+            COLLECTION_ID,
+            id,
+            rest,
+        );
+
+        promise.then((res) => {
+            getCandidacies();
+            const { documents } = res;
+            const transformed = transformDocumentsToCandidacies(documents, user.userId);
+            setChosenCand(transformed.find((item) => item.id === id)!);
+        }, (err) => {
+            console.log("~> err", err);
+        });
+    };
+
+    /**
      * Delete candidacy
-     * @param id
+     * @param string
      * @returns void
      */
     const deleteCandidacy = (id: string) => {
@@ -107,7 +143,7 @@ export const CandidaciesProvider = ({ children }: Props) => {
         );
 
         promise.then(() => {
-            setSelectedCandidacy(null);
+            setChosenCand(null);
             getCandidacies();
         }, (err) => console.log("~> err", err));
     };
@@ -125,16 +161,17 @@ export const CandidaciesProvider = ({ children }: Props) => {
     useEffect(() => {
         setAllCompanies(composeCompanyData(allCandidacies));
         if (!allCandidacies.length) return;
-        setSelectedCandidacy(allCandidacies[0]);
+        setChosenCand(allCandidacies[0]);
     }, [allCandidacies]);
 
     const propsValues = {
         allCandidacies,
-        selectedCandidacy,
+        chosenCand,
         allCompanies,
         error,
-        setSelectedCandidacy,
+        setChosenCand,
         createCandidacy,
+        editCandidacy,
         deleteCandidacy,
     };
 
