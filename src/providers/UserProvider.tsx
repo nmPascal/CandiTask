@@ -47,6 +47,7 @@ export const UserProvider = ({ children }: Props) => {
             const promise = account.get();
 
             promise.then((res) => {
+                console.log('~> user', res); //REMOVE
                 const { $id, name, email } = res;
                 setUser({ userId: $id, name, email });
             }, (err) => {

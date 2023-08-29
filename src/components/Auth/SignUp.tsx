@@ -25,9 +25,8 @@ export const SignUp: FC = (): JSX.Element => {
     return (
         <Grid container spacing={2}>
             {...Array(["firstName", "lastName"].map((field, idx) => (
-                <Grid item xs={12} sm={6}>
+                <Grid key={idx} item xs={12} sm={6}>
                     <TextField
-                        key={idx}
                         id={field}
                         name={field}
                         label={`${field.charAt(0).toUpperCase()}${field
@@ -40,9 +39,8 @@ export const SignUp: FC = (): JSX.Element => {
                 </Grid>
             )))}
             {...Array(["email", "password"].map((field, idx) => (
-                <Grid item xs={12}>
+                <Grid key={idx} item xs={12}>
                     <TextField
-                        key={idx}
                         id={field}
                         name={field}
                         label={`${field[0].toUpperCase()}${field.slice(1)}`}
