@@ -7,3 +7,4 @@ export * from "./Candidacies/Candidacies";
 export * from "./Companies/CompanyList";
 export * from "./JobBoards";
 export * from "./Profile";
+export * from "./Settings";

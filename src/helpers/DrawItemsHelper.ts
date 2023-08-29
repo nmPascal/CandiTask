@@ -14,7 +14,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
 
 // components
-import { Overview, NewCandidacy, Candidacies, CompanyList, JobBoards, Profile } from '../components';
+import { Overview, NewCandidacy, Candidacies, CompanyList, JobBoards, Profile, Settings } from '../components';
 
 export const DrawerItemsHelper: IDrawerItemsHelperProps = {
     primary: [
@@ -26,7 +26,7 @@ export const DrawerItemsHelper: IDrawerItemsHelperProps = {
     ],
     secondary: [
         { name: "Profile", icon: PersonIcon, component: Profile },
-        { name: "Settings", icon: SettingsIcon, component: Overview }
+        { name: "Settings", icon: SettingsIcon, component: Settings }
     ],
 
     getItems: (items: EDrawerItems) => {
