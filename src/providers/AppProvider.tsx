@@ -26,6 +26,8 @@ export const AppProvider = ({ children }: Props) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
     const isTablet = useMediaQuery(theme.breakpoints.down("md"));
+
+    console.log('~> theme', theme.palette.primary.main); //REMOVE
     
     const [themeMode, setThemeMode] = useState<EThemeMode>(EThemeMode.DARK);
 

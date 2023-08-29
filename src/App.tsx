@@ -2,17 +2,23 @@
 import { useUserContext } from "./providers";
 
 // components
-import { Layout, AuthForm, Dashboard } from "./components";
+import { Layout, AuthForm, Dashboard, Loader } from "./components";
 
 // styles
 import "./App.css";
 
 function App() {
-    const { user } = useUserContext();
+    const { user, isLoading } = useUserContext();
 
     return (
         <Layout>
-            {user ? <Dashboard /> : <AuthForm />}
+            {isLoading ? (
+                <Loader />
+            ) : user ? (
+                <Dashboard />
+            ) : (
+                <AuthForm />
+            )}
         </Layout>
     );
 }

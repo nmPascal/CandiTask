@@ -8,7 +8,7 @@ import {
 } from "react";
 
 // providers
-import { useUserContext, useDashboardContext, useAppContext } from "../providers";
+import { useUserContext, useDashboardContext, useAppContext } from ".";
 
 // interfaces
 import {

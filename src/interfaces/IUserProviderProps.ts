@@ -5,6 +5,7 @@ export interface IUserProviderProps {
     formType: EFormTypes;
     user: IUser | null;
     error: string | null;
+    isLoading: boolean;
     toggleFormType: () => void;
     signUp: (newUser: IUserRegister) => void;
     signIn: (credentials: IUserCredentials) => void;

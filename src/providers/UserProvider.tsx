@@ -18,6 +18,7 @@ const UserContext = createContext<IUserProviderProps>({
     formType: EFormTypes.REGISTER,
     user: null,
     error: null,
+    isLoading: true,
     toggleFormType: () => { },
     signUp: () => { },
     signIn: () => { },
@@ -33,8 +34,9 @@ export const useUserContext = () => useContext(UserContext);
 export const UserProvider = ({ children }: Props) => {
     const account = new Account(client);
 
-    const [error, setError] = useState<string | null>(null);
     const [user, setUser] = useState<IUser | null>(null);
+    const [error, setError] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [formType, setFormType] = useState<EFormTypes>(EFormTypes.REGISTER);
 
     const toggleFormType = () => {
@@ -51,6 +53,7 @@ export const UserProvider = ({ children }: Props) => {
 
             promise.then(({ $id: userId, name, email, registration }) => {
                 setUser({ userId, name, email, registration });
+                setIsLoading(false);
             }, (err) => {
                 setError(err.message);
                 setUser(null);
@@ -94,6 +97,7 @@ export const UserProvider = ({ children }: Props) => {
         formType,
         user,
         error,
+        isLoading,
         toggleFormType,
         signUp,
         signIn,
