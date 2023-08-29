@@ -17,6 +17,7 @@ import {
 export const CompanyList: FC = (): JSX.Element => {
     const { allCompanies } = useCandidaciesContext();
     const { isTablet } = useAppContext();
+    
     return (
         <Paper
             sx={{
