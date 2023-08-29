@@ -14,6 +14,8 @@ import {
     Box,
     Button,
     Divider,
+    Grid,
+    Paper,
     Typography
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
@@ -92,8 +94,15 @@ export const CurrentCandidacy: FC = (): JSX.Element => {
     const styles = useStyles();
 
     return (
-        <>
-            {chosenCand ? (
+        <Grid item xs={12} lg={6}>
+            <Paper
+                sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                }}
+            >
+                {chosenCand ? (
                 <Box className={styles.container}>
                     <Box>
                         <Box className={styles.header__details}>
@@ -224,7 +233,8 @@ export const CurrentCandidacy: FC = (): JSX.Element => {
                     </Box>
                     <ConfirmationDialog targetId={chosenCand?.id} isOpen={dialogIsOpen} setDialogIsOpen={setDialogIsOpen} />
                 </Box>
-            ) : <Typography variant="body2" color="text.secondary" align="center">No candidacy selected</Typography>}
-        </>
+                ) : <Typography variant="body2" color="text.secondary" align="center">No candidacy selected</Typography>}
+            </Paper>
+        </Grid>
     );
 };
