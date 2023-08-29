@@ -91,8 +91,8 @@ export const EditMode: FC<Props> = ({ item, edit, editedValues, setEditedValues 
         case EEditData.NOTE:
             return (
                 <TextareaAutosize
-                    minRows={1}
-                    maxRows={1}
+                    minRows={2}
+                    maxRows={3}
                     style={{ marginLeft: '5px', padding: "5px", width: '100%' }}
                     placeholder="Type something..."
                     value={editedValues?.note ? editedValues.note : ""}

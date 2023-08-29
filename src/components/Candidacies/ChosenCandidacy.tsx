@@ -24,6 +24,7 @@ import { makeStyles } from '@mui/styles';
 import { ConfirmationDialog } from './ConfirmationDialog';
 import { EditMode } from './EditMode';
 import { IEditCandidacy } from '../../interfaces';
+import { useAppContext } from '../../providers';
 
 const useStyles = makeStyles({
     container: {
@@ -71,8 +72,9 @@ const useStyles = makeStyles({
     }
 });
 
-export const CurrentCandidacy: FC = (): JSX.Element => {
-    const { chosenCand, editCandidacy } = useCandidaciesContext();
+export const ChosenCandidacy: FC = (): JSX.Element => {
+    const { chosenCand, setChosenCand, editCandidacy } = useCandidaciesContext();
+    const { isTablet } = useAppContext();
 
     const [dialogIsOpen, setDialogIsOpen] = useState<boolean>(false);
     const [isEditMode, setIsEditMode] = useState<boolean>(false);
@@ -103,136 +105,141 @@ export const CurrentCandidacy: FC = (): JSX.Element => {
                 }}
             >
                 {chosenCand ? (
-                <Box className={styles.container}>
-                    <Box>
-                        <Box className={styles.header__details}>
-                            <Box>
-                                <Typography component="h2" variant="h6" color="primary">
-                                    {chosenCand.position}
+                    <Box className={styles.container}>
+                        <Box>
+                            <Box className={styles.header__details}>
+                                <Box>
+                                    <Typography component="h2" variant="h6" color="primary">
+                                        {chosenCand.position}
+                                    </Typography>
+                                    <Typography variant="body1" color="text.secondary">
+                                        {chosenCand.company}
+                                    </Typography>
+                                </Box>
+                                <Box>
+                                    {isEditMode ? (
+                                        <EditMode
+                                            item={chosenCand}
+                                            edit={EEditData.STATUS}
+                                            editedValues={editedValues}
+                                            setEditedValues={setEditedValues}
+                                        />
+                                    ) : (
+                                        <Typography
+                                            variant="body2"
+                                            color="text.secondary"
+                                            className={styles.status}
+                                            sx={{  backgroundColor: getStatusColor(chosenCand.status) }}
+                                        >
+                                            {chosenCand.status}
+                                        </Typography>
+                                    )}
+                                </Box>
+                            </Box>
+                            <Divider sx={{my: 1.5}}/>
+                        </Box>
+                        <Box>
+                            <Box className={styles.details}>
+                                <Typography variant="body2" color="text.secondary">
+                                    Location:
                                 </Typography>
-                                <Typography variant="body1" color="text.secondary">
-                                    {chosenCand.company}
+                                <Typography variant="body2" ml={1}>
+                                    {chosenCand.location},
+                                </Typography>
+                                <Typography className={styles.country} variant="body2" ml={1}>
+                                    {chosenCand.country}
                                 </Typography>
                             </Box>
-                            <Box>
+                            <Box className={styles.details}>
+                                <Typography
+                                    variant="body2"
+                                    color="text.secondary"
+                                    className={styles.details__item}
+                                >
+                                    Remote:
+                                </Typography>
                                 {isEditMode ? (
                                     <EditMode
                                         item={chosenCand}
-                                        edit={EEditData.STATUS}
+                                        edit={EEditData.REMOTE}
                                         editedValues={editedValues}
                                         setEditedValues={setEditedValues}
                                     />
                                 ) : (
-                                    <Typography
-                                        variant="body2"
-                                        color="text.secondary"
-                                        className={styles.status}
-                                        sx={{  backgroundColor: getStatusColor(chosenCand.status) }}
-                                    >
-                                        {chosenCand.status}
+                                    <Typography variant="body2" ml={1}>
+                                        {chosenCand.remote ? chosenCand.remote : "N/A"}
                                     </Typography>
                                 )}
-                            </Box>
+                            </Box>        
+                            <Box className={styles.details}>
+                                <Typography
+                                    variant="body2"
+                                    color="text.secondary"
+                                    className={styles.details__item}
+                                >
+                                    Salary:
+                                </Typography>
+                                {isEditMode ? (
+                                    <EditMode
+                                        item={chosenCand}
+                                        edit={EEditData.SALARY}
+                                        editedValues={editedValues}
+                                        setEditedValues={setEditedValues}
+                                    />
+                                ) : (
+                                    <Typography variant="body2" ml={1}>
+                                        {chosenCand.salary ? chosenCand.salary : "N/A"}
+                                    </Typography>
+                                )}
+                            </Box>        
+                            <Box className={styles.details}>
+                                <Typography
+                                    variant="body2"
+                                    color="text.secondary"
+                                    className={styles.details__item}
+                                >
+                                    Note:
+                                </Typography>
+                                {isEditMode ? (
+                                    <EditMode
+                                        item={chosenCand}
+                                        edit={EEditData.NOTE}
+                                        editedValues={editedValues}
+                                        setEditedValues={setEditedValues}
+                                    />
+                                ) : (
+                                    <Typography variant="body2" ml={1}>
+                                        {chosenCand.note ? chosenCand.note : "N/A"}
+                                    </Typography>
+                                )}
+                            </Box>        
                         </Box>
-                        <Divider sx={{my: 1.5}}/>
-                    </Box>
-                    <Box>
-                        <Box className={styles.details}>
-                            <Typography variant="body2" color="text.secondary">
-                                Location:
-                            </Typography>
-                            <Typography variant="body2" ml={1}>
-                                {chosenCand.location},
-                            </Typography>
-                            <Typography className={styles.country} variant="body2" ml={1}>
-                                {chosenCand.country}
-                            </Typography>
-                        </Box>
-                        <Box className={styles.details}>
-                            <Typography
-                                variant="body2"
-                                color="text.secondary"
-                                className={styles.details__item}
-                            >
-                                Remote:
-                            </Typography>
-                            {isEditMode ? (
-                                <EditMode
-                                    item={chosenCand}
-                                    edit={EEditData.REMOTE}
-                                    editedValues={editedValues}
-                                    setEditedValues={setEditedValues}
-                                />
-                            ) : (
-                                <Typography variant="body2" ml={1}>
-                                    {chosenCand.remote ? chosenCand.remote : "N/A"}
-                                </Typography>
-                            )}
-                        </Box>        
-                        <Box className={styles.details}>
-                            <Typography
-                                variant="body2"
-                                color="text.secondary"
-                                className={styles.details__item}
-                            >
-                                Salary:
-                            </Typography>
-                            {isEditMode ? (
-                                <EditMode
-                                    item={chosenCand}
-                                    edit={EEditData.SALARY}
-                                    editedValues={editedValues}
-                                    setEditedValues={setEditedValues}
-                                />
-                            ) : (
-                                <Typography variant="body2" ml={1}>
-                                    {chosenCand.salary ? chosenCand.salary : "N/A"}
-                                </Typography>
-                            )}
-                        </Box>        
-                        <Box className={styles.details}>
-                            <Typography
-                                variant="body2"
-                                color="text.secondary"
-                                className={styles.details__item}
-                            >
-                                Note:
-                            </Typography>
-                            {isEditMode ? (
-                                <EditMode
-                                    item={chosenCand}
-                                    edit={EEditData.NOTE}
-                                    editedValues={editedValues}
-                                    setEditedValues={setEditedValues}
-                                />
-                            ) : (
-                                <Typography variant="body2" ml={1}>
-                                    {chosenCand.note ? chosenCand.note : "N/A"}
-                                </Typography>
-                            )}
-                        </Box>        
-                    </Box>
-                    <Box className={styles.footer}>
-                        <Divider sx={{my: 1.5}}/>
-                        <Box className={styles.footer__controls}>
-                            <Box>
-                                <Button onClick={handleOnEdit}>
-                                    {isEditMode ? "Save" : "Edit"}
-                                </Button>
-                                <Button onClick={() => window.open(chosenCand.url, "_blank")}>
-                                    Link
+                        <Box className={styles.footer}>
+                            <Divider sx={{my: 1.5}}/>
+                            <Box className={styles.footer__controls}>
+                                <Box>
+                                    <Button onClick={handleOnEdit}>
+                                        {isEditMode ? "Save" : "Edit"}
+                                    </Button>
+                                    <Button onClick={() => window.open(chosenCand.url, "_blank")}>
+                                        Link
+                                    </Button>
+                                    {isTablet && (
+                                        <Button onClick={() => setChosenCand(null)}>
+                                            Close
+                                        </Button>
+                                    )}
+                                </Box>
+                                <Button
+                                    className={styles.footer__controls__delete}
+                                    onClick={() => setDialogIsOpen(true)}
+                                >
+                                    Delete
                                 </Button>
                             </Box>
-                            <Button
-                                className={styles.footer__controls__delete}
-                                onClick={() => setDialogIsOpen(true)}
-                            >
-                                Delete
-                            </Button>
                         </Box>
+                        <ConfirmationDialog targetId={chosenCand?.id} isOpen={dialogIsOpen} setDialogIsOpen={setDialogIsOpen} />
                     </Box>
-                    <ConfirmationDialog targetId={chosenCand?.id} isOpen={dialogIsOpen} setDialogIsOpen={setDialogIsOpen} />
-                </Box>
                 ) : <Typography variant="body2" color="text.secondary" align="center">No candidacy selected</Typography>}
             </Paper>
         </Grid>

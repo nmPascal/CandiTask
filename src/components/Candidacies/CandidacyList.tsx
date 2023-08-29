@@ -17,8 +17,8 @@ import {
     Typography
 } from '@mui/material';
 
-export const ChosenCandidacy: FC = (): JSX.Element => {
-    const { allCandidacies, setChosenCand } = useCandidaciesContext();
+export const CandidacyList: FC = (): JSX.Element => {
+    const { allCandidacies, chosenCand, setChosenCand } = useCandidaciesContext();
     const { isMobile } = useAppContext();
 
     return (
@@ -49,7 +49,11 @@ export const ChosenCandidacy: FC = (): JSX.Element => {
                             </TableHead>
                             <TableBody>
                                 {allCandidacies.map((row) => (
-                                    <TableRow key={row.id} style={{height: "50px"}}>
+                                    <TableRow
+                                        key={row.id}
+                                        selected={chosenCand?.id === row.id}
+                                        style={{height: "50px"}}
+                                    >
                                         <TableCell>{row.company}</TableCell>
                                         {!isMobile && (
                                             <>

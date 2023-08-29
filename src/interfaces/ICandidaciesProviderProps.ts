@@ -6,7 +6,7 @@ export interface ICandidaciesProviderProps {
     chosenCand: ICandidacy | null;
     allCompanies: ICompany[];
     error: string;
-    setChosenCand: (candidacy: ICandidacy) => void;
+    setChosenCand: (candidacy: ICandidacy | null) => void;
     createCandidacy: (candidacy: INewCandidacy) => void;
     editCandidacy: (editedData: IEditCandidacy) => void;
     deleteCandidacy: (id: string) => void;

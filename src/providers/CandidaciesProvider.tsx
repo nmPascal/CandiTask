@@ -8,7 +8,7 @@ import {
 } from "react";
 
 // providers
-import { useUserContext, useDashboardContext } from "../providers";
+import { useUserContext, useDashboardContext, useAppContext } from "../providers";
 
 // interfaces
 import {
@@ -53,14 +53,17 @@ const DATABASE_ID = import.meta.env.VITE_APPWRITE_DATABASE_ID;
 const COLLECTION_ID = import.meta.env.VITE_APPWRITE_COLLECTION_ID;
 
 export const CandidaciesProvider = ({ children }: Props) => {
+    const { isTablet } = useAppContext();
     const { user } = useUserContext();
     const { setCurrentTab } = useDashboardContext();
-    const databases = new Databases(client);
 
     const [allCandidacies, setAllCandidacies] = useState<ICandidacy[]>([]);
     const [chosenCand, setChosenCand] = useState<ICandidacy | null>(null);
     const [allCompanies, setAllCompanies] = useState<ICompany[]>([]);
     const [error, setError] = useState<string>("");
+
+    const databases = new Databases(client);
+
 
     /**
      * Create candidacy
@@ -148,6 +151,10 @@ export const CandidaciesProvider = ({ children }: Props) => {
         }, (err) => console.log("~> err", err));
     };
 
+    /**
+     * Fetch Candidacies on User Change
+     * Loads candidacy data when a user is available, otherwise resets the list.
+     */
     useEffect(() => {
         if (!user) {
             setAllCandidacies([]);
@@ -158,10 +165,18 @@ export const CandidaciesProvider = ({ children }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user]);
 
+    /**
+     * Update Companies and Chosen Candidacy
+     * Updates company data and chosen candidate when candidacies or tablet mode change.
+     */
     useEffect(() => {
         setAllCompanies(composeCompanyData(allCandidacies));
+
         if (!allCandidacies.length) return;
+        if (isTablet) return;
+
         setChosenCand(allCandidacies[0]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [allCandidacies]);
 
     const propsValues = {
