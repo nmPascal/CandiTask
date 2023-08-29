@@ -11,6 +11,13 @@ export interface IUserProviderProps {
     logoutUser: () => void;
 }
 
+export interface IUser {
+    userId: string;
+    name: string;
+    email: string;
+    registration: string;
+}
+
 export interface IUserRegister {
     email: string;
     password: string;
@@ -20,10 +27,4 @@ export interface IUserRegister {
 export interface IUserCredentials {
     email: string;
     password: string;
-}
-
-export interface IUser {
-    userId: string;
-    name: string;
-    email: string;
 }

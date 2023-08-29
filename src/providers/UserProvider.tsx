@@ -26,8 +26,10 @@ const UserContext = createContext<IUserProviderProps>({
 
 export const useUserContext = () => useContext(UserContext);
 
+// TODO: add isLoading
+// TODO: Add verification email
+
 export const UserProvider = ({ children }: Props) => {
-    // TODO: add isLoading
     const account = new Account(client);
 
     const [error, setError] = useState<string | null>(null);
@@ -46,10 +48,8 @@ export const UserProvider = ({ children }: Props) => {
         if (storage) {
             const promise = account.get();
 
-            promise.then((res) => {
-                console.log('~> user', res); //REMOVE
-                const { $id, name, email } = res;
-                setUser({ userId: $id, name, email });
+            promise.then(({ $id: userId, name, email, registration }) => {
+                setUser({ userId, name, email, registration });
             }, (err) => {
                 setError(err.message);
                 setUser(null);

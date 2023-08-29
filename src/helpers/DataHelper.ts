@@ -7,7 +7,10 @@ import { ECandidacyStatus } from "../utils";
 // packages
 import { Models } from "appwrite";
 
-export const transformDocumentsToCandidacies = (documents: Models.Document[], uid: string): ICandidacy[] => {
+export const transformDocumentsToCandidacies = (
+    documents: Models.Document[],
+    uid: string
+): ICandidacy[] => {
     return documents.map((doc) => ({
         uid,
         id: doc.$id,
@@ -45,7 +48,9 @@ export const composeCompanyData = (candidacies: ICandidacy[]): ICompany[] => {
 };
 
 export const getPopularCompanies = (companies: ICompany[]): ICompany[] => {
-    return companies.sort((a, b) => b.totalCandidacies - a.totalCandidacies).slice(0, 3);
+    return companies
+        .sort((a, b) => b.totalCandidacies - a.totalCandidacies)
+        .slice(0, 3);
 };
 
 export const getStatusColor = (status: ECandidacyStatus): string => {
@@ -61,8 +66,9 @@ export const getStatusColor = (status: ECandidacyStatus): string => {
     }
 };
 
-
-export const composeStatusChart = (candidacies: ICandidacy[] | ICandidacy): IStatusChart[] => {
+export const composeStatusChart = (
+    candidacies: ICandidacy[] | ICandidacy
+): IStatusChart[] => {
     const statusCount: Record<ECandidacyStatus, number> = {
         [ECandidacyStatus.DONE]: 0,
         [ECandidacyStatus.PENDING]: 0,
@@ -77,11 +83,18 @@ export const composeStatusChart = (candidacies: ICandidacy[] | ICandidacy): ISta
         statusCount[candidacies.status] = 1;
     }
 
-    const filteredStatuses = Object.keys(statusCount).filter((status) => statusCount[status as ECandidacyStatus] > 0);
+    const filteredStatuses = Object.keys(statusCount).filter(
+        (status) => statusCount[status as ECandidacyStatus] > 0
+    );
 
     return filteredStatuses.map((status) => {
-        const name = `${status.charAt(0).toUpperCase()}${status.slice(1)}` as ECandidacyStatus;
-        const value = (statusCount[status as ECandidacyStatus] / (Array.isArray(candidacies) ? candidacies.length : 1)) * 100;
+        const name = `${status.charAt(0).toUpperCase()}${status.slice(
+            1
+        )}` as ECandidacyStatus;
+        const value =
+            (statusCount[status as ECandidacyStatus] /
+                (Array.isArray(candidacies) ? candidacies.length : 1)) *
+            100;
         const color = getStatusColor(status as ECandidacyStatus);
         return { name, value, color };
     });
@@ -91,6 +104,21 @@ export const isStatusChartComplete = (statusChart: IStatusChart[]): boolean => {
     return statusChart.some((status) => status.value === 100);
 };
 
-export const getAppointedCandidacies  = (candidacies: ICandidacy[]): ICandidacy[] => {
-    return candidacies.filter((candidacy) => candidacy.status === ECandidacyStatus.DONE);
-}
+export const getAppointedCandidacies = (
+    candidacies: ICandidacy[]
+): ICandidacy[] => {
+    return candidacies.filter(
+        (candidacy) => candidacy.status === ECandidacyStatus.DONE
+    );
+};
+
+export const formatDateTime = (date: string): string => {
+    const dateTime = new Date(date);
+    const day = dateTime.getDate().toString().padStart(2, "0");
+    const month = (dateTime.getMonth() + 1).toString().padStart(2, "0");
+    const year = dateTime.getFullYear();
+    const hours = dateTime.getHours().toString().padStart(2, "0");
+    const minutes = dateTime.getMinutes().toString().padStart(2, "0");
+
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
+};

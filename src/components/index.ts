@@ -6,3 +6,4 @@ export * from "./Candidacies/NewCandidacy";
 export * from "./Candidacies/Candidacies";
 export * from "./Companies/CompanyList";
 export * from "./JobBoards";
+export * from "./User/Profile";
