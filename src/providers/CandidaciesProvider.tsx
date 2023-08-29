@@ -64,6 +64,22 @@ export const CandidaciesProvider = ({ children }: Props) => {
 
     const databases = new Databases(client);
 
+    /**
+     * Get all candidacies
+     * @returns void
+     */
+    const getCandidacies = () => {
+        if (!user) return;
+        const promise = databases.listDocuments(
+            DATABASE_ID,
+            COLLECTION_ID,
+        );
+
+        promise.then((res) => {
+            const { documents } = res;
+            setAllCandidacies(transformDocumentsToCandidacies(documents, user.userId));
+        }, (err) => console.log("~> err", err));
+    };
 
     /**
      * Create candidacy
@@ -93,23 +109,6 @@ export const CandidaciesProvider = ({ children }: Props) => {
     };
 
     /**
-     * Get all candidacies
-     * @returns void
-     */
-    const getCandidacies = () => {
-        if (!user) return;
-        const promise = databases.listDocuments(
-            DATABASE_ID,
-            COLLECTION_ID,
-        );
-
-        promise.then((res) => {
-            const { documents } = res;
-            setAllCandidacies(transformDocumentsToCandidacies(documents, user.userId));
-        }, (err) => console.log("~> err", err));
-    };
-
-    /**
      * Update candidacy
      * @param IEditCandidacy
      * @returns void
@@ -125,8 +124,7 @@ export const CandidaciesProvider = ({ children }: Props) => {
 
         promise.then((res) => {
             getCandidacies();
-            const { documents } = res;
-            const transformed = transformDocumentsToCandidacies(documents, user.userId);
+            const transformed = transformDocumentsToCandidacies([res], user.userId);
             setChosenCand(transformed.find((item) => item.id === id)!);
         }, (err) => {
             console.log("~> err", err);
