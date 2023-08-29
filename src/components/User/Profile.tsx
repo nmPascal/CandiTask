@@ -1,11 +1,13 @@
 import { FC } from "react";
 
+// helpers
+import { formatDateTime } from "../../helpers";
+
 // providers
 import { useUserContext } from "../../providers";
 
 // packages
 import { Avatar, Box, Divider, Paper, Typography } from "@mui/material";
-import { formatDateTime } from "../../helpers";
 
 export const Profile: FC = (): JSX.Element => {
     const { user } = useUserContext();
