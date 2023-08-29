@@ -1,5 +1,9 @@
 import { FC } from 'react';
 
+// utils
+import { jobBoardList } from '../../utils';
+
+// packages
 import {
     Link,
     Paper,
@@ -10,7 +14,6 @@ import {
     TableRow,
     Typography
 } from '@mui/material';
-import { jobBoardList } from '../../utils';
 
 export const JobBoardList: FC = (): JSX.Element => {
 

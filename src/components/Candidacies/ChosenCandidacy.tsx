@@ -19,7 +19,7 @@ import {
 import { makeStyles } from '@mui/styles';
 
 // components
-import { ConfirmationDialog } from '../ConfirmationDialog';
+import { ConfirmationDialog } from './ConfirmationDialog';
 import { EditMode } from './EditMode';
 import { IEditCandidacy } from '../../interfaces';
 

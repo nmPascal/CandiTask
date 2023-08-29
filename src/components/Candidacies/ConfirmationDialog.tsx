@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 
 // providers
-import { useCandidaciesContext } from "../providers";
+import { useCandidaciesContext } from "../../providers";
 
 // packages
 import {

@@ -1,5 +1,8 @@
 import { FC, FormEvent } from "react";
 
+// utils
+import { EFormTypes } from "../../utils";
+
 // providers
 import { useUserContext } from "../../providers";
 
@@ -13,9 +16,6 @@ import {
     Container,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-
-// utils
-import { EFormTypes } from "../../utils";
 
 // components
 import { Copyright } from "../Copyright";

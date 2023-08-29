@@ -6,17 +6,18 @@ import {
     useEffect,
     useState,
 } from "react";
+
 // providers
 import { useAppContext } from ".";
+
+// interfaces
+import { IDashboardProviderProps, IDrawerItem } from "../interfaces";
 
 // helpers
 import { DrawerItemsHelper } from "../helpers";
 
 // utils
 import { EDrawerItems } from "../utils";
-
-// interfaces
-import { IDashboardProviderProps, IDrawerItem } from "../interfaces";
 
 type Props = {
     children: ReactNode;
