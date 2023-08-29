@@ -15,30 +15,38 @@ type Props = {
 };
 
 const AppContext = createContext<IAppProviderProps>({
+    themeMode: EThemeMode.DARK,
+    primaryColor: "#00897b",
+    secondaryColor: "#967bb6",
     isMobile: false,
     isTablet: false,
     toggleThemeMode: () => { },
+    setPrimaryColor: () => { },
+    setSecondaryColor: () => { },
 });
 
 export const useAppContext = () => useContext(AppContext);
 
 export const AppProvider = ({ children }: Props) => {
+    const [themeMode, setThemeMode] = useState<EThemeMode>(EThemeMode.DARK);
+    const [primaryColor, setPrimaryColor] = useState("#00897b");
+    const [secondaryColor, setSecondaryColor] = useState("#967bb6");
+
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
     const isTablet = useMediaQuery(theme.breakpoints.down("md"));
 
     console.log('~> theme', theme.palette.primary.main); //REMOVE
     
-    const [themeMode, setThemeMode] = useState<EThemeMode>(EThemeMode.DARK);
 
     const themeConfig = createTheme({
         palette: {
             mode: themeMode,
             primary: {
-                main: "#00897b",
+                main: primaryColor,
             },
             secondary: {
-                main: "#967bb6",
+                main: secondaryColor,
             },
         },
     });
@@ -50,9 +58,14 @@ export const AppProvider = ({ children }: Props) => {
     };
 
     const propsValues = {
+        themeMode,
+        primaryColor,
+        secondaryColor,
         isMobile,
         isTablet,
         toggleThemeMode,
+        setPrimaryColor,
+        setSecondaryColor,
     };
 
     return (
