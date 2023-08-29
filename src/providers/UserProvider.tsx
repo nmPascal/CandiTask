@@ -74,7 +74,10 @@ export const UserProvider = ({ children }: Props) => {
     const logoutUser = () => {
         const promise = account.deleteSession("current");
 
-        promise.then(() => setUser(null), (err) => setError(err.message));
+        promise.then(() => {
+            setUser(null);
+            setFormType(EFormTypes.LOGIN);
+        }, (err) => setError(err.message));
     };
 
     useEffect(() => {
