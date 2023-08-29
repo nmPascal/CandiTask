@@ -28,6 +28,7 @@ export const useUserContext = () => useContext(UserContext);
 
 // TODO: add isLoading
 // TODO: Add verification email
+// TODO: Add meeting "Notification > AppBar"
 
 export const UserProvider = ({ children }: Props) => {
     const account = new Account(client);
