@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 // utils
-import { jobBoardList } from '../../utils';
+import { jobBoardList } from '../utils';
 
 // packages
 import {
@@ -15,7 +15,7 @@ import {
     Typography
 } from '@mui/material';
 
-export const JobBoardList: FC = (): JSX.Element => {
+export const JobBoards: FC = (): JSX.Element => {
 
     return (
        <Paper sx={{ p:2 }}>

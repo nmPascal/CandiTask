@@ -4,9 +4,9 @@ import { FC } from "react";
 import { Grid } from "@mui/material";
 
 // components
-import { Appointments } from "./Appointments";
-import { StatusChart } from "./StatusChart";
-import { PopularCompanies } from "./PopularCompanies";
+import { Appointments } from "./Candidacies/Appointments";
+import { StatusChart } from "./Candidacies/StatusChart";
+import { PopularCompanies } from "./Companies/PopularCompanies";
 
 export const Overview: FC = (): JSX.Element => {
     return (
