@@ -7,10 +7,7 @@ import { ECandidacyStatus } from "../utils";
 // packages
 import { Models } from "appwrite";
 
-export const transformDocumentsToCandidacies = (
-    documents: Models.Document[],
-    uid: string
-): ICandidacy[] => {
+export const transformDocsToCandidacies = (documents: Models.Document[], uid: string): ICandidacy[] => {
     return documents.map((doc) => ({
         uid,
         id: doc.$id,

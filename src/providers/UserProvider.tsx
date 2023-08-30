@@ -27,7 +27,6 @@ const UserContext = createContext<IUserProviderProps>({
 
 export const useUserContext = () => useContext(UserContext);
 
-// TODO: add isLoading
 // TODO: Add verification email
 // TODO: Add meeting "Notification > AppBar"
 

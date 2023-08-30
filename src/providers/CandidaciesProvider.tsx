@@ -23,7 +23,7 @@ import {
 import {
     DrawerItemsHelper,
     composeCompanyData,
-    transformDocumentsToCandidacies
+    transformDocsToCandidacies
 } from "../helpers";
 
 // utils
@@ -50,7 +50,7 @@ const CandidaciesContext = createContext<ICandidaciesProviderProps>({
 export const useCandidaciesContext = () => useContext(CandidaciesContext);
 
 const DATABASE_ID = import.meta.env.VITE_APPWRITE_DATABASE_ID;
-const COLLECTION_ID = import.meta.env.VITE_APPWRITE_COLLECTION_ID;
+const COLLECTION_ID = import.meta.env.VITE_APPWRITE_CANDICACIES_COLLECTION_ID;
 
 export const CandidaciesProvider = ({ children }: Props) => {
     const { isTablet } = useAppContext();
@@ -76,13 +76,13 @@ export const CandidaciesProvider = ({ children }: Props) => {
         );
 
         promise.then(({ documents }) => {
-            setAllCandidacies(transformDocumentsToCandidacies(documents, user.userId));
+            setAllCandidacies(transformDocsToCandidacies(documents, user.userId));
         }, (err) => console.log("~> err", err));
     };
 
     /**
      * Create candidacy
-     * @param INewCandidacy
+     * @param {INewCandidacy} newCandidacy
      * @returns void
      */
     const createCandidacy = (newCandidacy: INewCandidacy) => {
@@ -109,7 +109,7 @@ export const CandidaciesProvider = ({ children }: Props) => {
 
     /**
      * Update candidacy
-     * @param IEditCandidacy
+     * @param {IEditCandidacy} candidacy
      * @returns void
      */
     const editCandidacy = ({ id, ...rest }: IEditCandidacy) => {
@@ -123,7 +123,7 @@ export const CandidaciesProvider = ({ children }: Props) => {
 
         promise.then((res) => {
             getCandidacies();
-            const transformed = transformDocumentsToCandidacies([res], user.userId);
+            const transformed = transformDocsToCandidacies([res], user.userId);
             setChosenCand(transformed.find((item) => item.id === id)!);
         }, (err) => {
             console.log("~> err", err);
@@ -132,14 +132,14 @@ export const CandidaciesProvider = ({ children }: Props) => {
 
     /**
      * Delete candidacy
-     * @param string
+     * @param {string} candidacyId
      * @returns void
      */
-    const deleteCandidacy = (id: string) => {
+    const deleteCandidacy = (candidacyId: string) => {
         const promise = databases.deleteDocument(
             DATABASE_ID,
             COLLECTION_ID,
-            id,
+            candidacyId,
         );
 
         promise.then(() => {

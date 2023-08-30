@@ -1,5 +1,9 @@
 export const drawerWidth = 240;
 
+export const defaultThemeMode = "dark";
+export const defaultPrimaryColor = "#00897b";
+export const defaultSecondaryColor = "#967bb6";
+
 export const jobBoardList = [
     { name: "Cord", url: "https://cord.co/login"},
     { name: "Xing", url: "https://login.xing.com/?locale=fr&dest_url=https%3A%2F%2Fwww.xing.com%2Fdiscover%2Fupdates"},
