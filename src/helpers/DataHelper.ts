@@ -7,6 +7,12 @@ import { ECandidacyStatus } from "../utils";
 // packages
 import { Models } from "appwrite";
 
+/**
+ * Transform Appwrite documents to Candidacy interface
+ * @param {Models.Document[]} documents 
+ * @param uid 
+ * @return {ICandidacy[]}
+ */
 export const transformDocsToCandidacies = (documents: Models.Document[], uid: string): ICandidacy[] => {
     return documents.map((doc) => ({
         uid,
@@ -25,6 +31,11 @@ export const transformDocsToCandidacies = (documents: Models.Document[], uid: st
     }));
 };
 
+/**
+ * Compose company data from candidacies
+ * @param {ICandidacy[]} candidacies
+ * @return {ICompany[]}
+ */
 export const composeCompanyData = (candidacies: ICandidacy[]): ICompany[] => {
     const companies: Record<string, ICompany> = {};
 
@@ -44,12 +55,22 @@ export const composeCompanyData = (candidacies: ICandidacy[]): ICompany[] => {
     return Object.values(companies);
 };
 
+/**
+ * Get companies with most candidacies
+ * @param {ICompany[]} companies 
+ * @return {ICompany[]}
+ */
 export const getPopularCompanies = (companies: ICompany[]): ICompany[] => {
     return companies
         .sort((a, b) => b.totalCandidacies - a.totalCandidacies)
         .slice(0, 3);
 };
 
+/**
+ * Create color for candidacy status
+ * @param {ECandidacyStatus} status 
+ * @return {string}
+ */
 export const getStatusColor = (status: ECandidacyStatus): string => {
     switch (status) {
         case ECandidacyStatus.ACCEPTED:
@@ -65,9 +86,12 @@ export const getStatusColor = (status: ECandidacyStatus): string => {
     }
 };
 
-export const composeStatusChart = (
-    candidacies: ICandidacy[] | ICandidacy
-): IStatusChart[] => {
+/**
+ * Compose status chart data
+ * @param {ICandidacy[] | ICandidacy} candidacies
+ * @return {IStatusChart[]}
+ */
+export const composeStatusChart = (candidacies: ICandidacy[] | ICandidacy): IStatusChart[] => {
     const statusCount: Record<ECandidacyStatus, number> = {
         [ECandidacyStatus.ACCEPTED]: 0,
         [ECandidacyStatus.PENDING]: 0,
@@ -100,18 +124,29 @@ export const composeStatusChart = (
     });
 };
 
+/**
+ * Check if status chart equals 100%
+ * @param {IStatusChart[]} statusChart
+ * @return {boolean}
+ */
 export const isStatusChartComplete = (statusChart: IStatusChart[]): boolean => {
     return statusChart.some((status) => status.value === 100);
 };
 
-export const getAppointedCandidacies = (
-    candidacies: ICandidacy[]
-): ICandidacy[] => {
-    return candidacies.filter(
-        (candidacy) => candidacy.status === ECandidacyStatus.WAITING
-    );
+/**
+ * Get candidacies where status is waiting
+ * @param {ICandidacy[]} candidacies
+ * @return {ICandidacy[]}
+ */
+export const getWaitingCandidacies = (candidacies: ICandidacy[]): ICandidacy[] => {
+    return candidacies.filter((candidacy) => candidacy.status === ECandidacyStatus.WAITING);
 };
 
+/**
+ * Format date to dd/mm/yyyy hh:mm
+ * @param {string} date
+ * @return {string}
+ */
 export const formatDateTime = (date: string): string => {
     const dateTime = new Date(date);
     const day = dateTime.getDate().toString().padStart(2, "0");

@@ -4,7 +4,7 @@ import { FC } from "react";
 import { useAppContext, useCandidaciesContext } from "../../providers";
 
 // helpers
-import { getAppointedCandidacies } from "../../helpers";
+import { getWaitingCandidacies } from "../../helpers";
 
 // packages
 import {
@@ -22,7 +22,7 @@ import {
 export const Appointments: FC = (): JSX.Element => {
     const { allCandidacies } = useCandidaciesContext();
     const { isMobile } = useAppContext(); 
-    const appointments = getAppointedCandidacies(allCandidacies);
+    const appointments = getWaitingCandidacies(allCandidacies);
 
     return (
         <Grid item xs={12}>

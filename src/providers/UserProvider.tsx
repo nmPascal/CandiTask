@@ -28,7 +28,6 @@ const UserContext = createContext<IUserProviderProps>({
 export const useUserContext = () => useContext(UserContext);
 
 // TODO: Add verification email
-// TODO: Add meeting "Notification > AppBar"
 
 export const UserProvider = ({ children }: Props) => {
     const account = new Account(client);
@@ -89,11 +88,17 @@ export const UserProvider = ({ children }: Props) => {
         }, (err) => console.error(err));
     };
 
+    /**
+     * Check if user is logged in on mount
+     */
     useEffect(() => {
         _checkIfLoggedIn();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    /**
+     * Clear error on formType change
+     */
     useEffect(() => {
         setError(null);
     }, [formType]);
