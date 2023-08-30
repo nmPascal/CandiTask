@@ -45,8 +45,8 @@ export const SignUp: FC = (): JSX.Element => {
                         name={field}
                         label={`${field[0].toUpperCase()}${field.slice(1)}`}
                         type={field}
-                        {...(idx === 0 && { autoFocus: true })}
                         className={styles.textField}
+                        autoComplete="off"
                         fullWidth
                         required
                     />
