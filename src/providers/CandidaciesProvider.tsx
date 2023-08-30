@@ -159,7 +159,6 @@ export const CandidaciesProvider = ({ children }: Props) => {
             setAllCandidacies([]);
             return;
         }
-        // createCandidacy();
         getCandidacies();
         setIsFirstLoad(false);
     }, [user]);
