@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-refresh/only-export-components */
 import {
     ReactNode,
@@ -8,7 +9,7 @@ import {
 } from "react";
 
 // providers
-import { useUserContext, useDashboardContext, useAppContext } from ".";
+import { useUserContext, useDashboardContext } from ".";
 
 // interfaces
 import {
@@ -53,7 +54,6 @@ const DATABASE_ID = import.meta.env.VITE_APPWRITE_DATABASE_ID;
 const COLLECTION_ID = import.meta.env.VITE_APPWRITE_CANDICACIES_COLLECTION_ID;
 
 export const CandidaciesProvider = ({ children }: Props) => {
-    const { isTablet } = useAppContext();
     const { user } = useUserContext();
     const { setCurrentTab } = useDashboardContext();
 
@@ -159,21 +159,13 @@ export const CandidaciesProvider = ({ children }: Props) => {
         }
         // createCandidacy();
         getCandidacies();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user]);
 
     /**
      * Update Companies and Chosen Candidacy
-     * Updates company data and chosen candidate when candidacies or tablet mode change.
      */
     useEffect(() => {
         setAllCompanies(composeCompanyData(allCandidacies));
-
-        if (!allCandidacies.length) return;
-        if (isTablet) return;
-
-        setChosenCand(allCandidacies[0]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [allCandidacies]);
 
     const propsValues = {
