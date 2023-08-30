@@ -12,10 +12,10 @@ function App() {
 
     return (
         <Layout>
-            {isLoading ? (
-                <Loader />
-            ) : user ? (
+            {user ? (
                 <Dashboard />
+            ) : user && isLoading ? (
+                <Loader />
             ) : (
                 <AuthForm />
             )}
