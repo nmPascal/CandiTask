@@ -13,16 +13,14 @@ import {
     IconButton,
     Divider,
     Paper,
-    Typography
+    Typography,
+    useTheme
 } from "@mui/material";
 import LogoutIcon from '@mui/icons-material/Logout';
 
 export const Profile: FC = (): JSX.Element => {
     const { user, logoutUser } = useUserContext();
-
-    const _randomColor = () => {
-        return "#" + Math.floor(Math.random() * 16777215).toString(16);
-    };
+    const theme = useTheme();
 
     if (!user) return <></>;
 
@@ -46,7 +44,7 @@ export const Profile: FC = (): JSX.Element => {
                     width: 100,
                     height: 100,
                     mb: 2,
-                    bgcolor: _randomColor
+                    bgcolor: theme.palette.secondary.main,
                 }}>
                     <Typography variant="h3">
                         {user.name.split(" ")[0].charAt(0)}
