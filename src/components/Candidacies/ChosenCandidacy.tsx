@@ -28,7 +28,7 @@ import { useAppContext } from '../../providers';
 
 const useStyles = makeStyles({
     container: {
-        height: "400px",
+        minHeight: "400px",
         display: "flex",
         flexDirection: "column",
     },
@@ -74,7 +74,7 @@ const useStyles = makeStyles({
 
 export const ChosenCandidacy: FC = (): JSX.Element => {
     const { chosenCand, setChosenCand, editCandidacy } = useCandidaciesContext();
-    const { isTablet } = useAppContext();
+    const { isTablet, isMobile } = useAppContext();
 
     const [dialogIsOpen, setDialogIsOpen] = useState<boolean>(false);
     const [isEditMode, setIsEditMode] = useState<boolean>(false);
@@ -217,7 +217,7 @@ export const ChosenCandidacy: FC = (): JSX.Element => {
                         <Box className={styles.footer}>
                             <Divider sx={{my: 1.5}}/>
                             <Box className={styles.footer__controls}>
-                                <Box>
+                                <Box sx={isMobile ? { display: "flex", flexDirection: "column" } : {}}>
                                     <Button onClick={handleOnEdit}>
                                         {isEditMode ? "Save" : "Edit"}
                                     </Button>
