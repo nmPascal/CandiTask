@@ -114,6 +114,10 @@ export const AppProvider = ({ children }: Props) => {
         }, (err) => console.error("~> err", err));
     };
 
+    /**
+     * Update user's app settings document
+     * @returns void
+     */
     const updateAppSettingsDocument = () => {
         if (!user) return;
         const promise = databases.updateDocument(
