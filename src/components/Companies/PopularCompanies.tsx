@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 // providers
-import { useCandidaciesContext } from '../../providers';
+import { useAppContext, useCandidaciesContext } from '../../providers';
 
 // helpers
 import { getPopularCompanies } from '../../helpers';
@@ -19,11 +19,12 @@ import {
 } from '@mui/material';
 
 export const PopularCompanies: FC = (): JSX.Element => {
+    const { isDesktop } = useAppContext();
     const { allCompanies } = useCandidaciesContext();
     const popularCompanies = getPopularCompanies(allCompanies);
 
     return (
-       <Grid item xs={12} md={8} lg={9}>
+       <Grid item xs={12} md={8} lg={isDesktop ? 7 : 6}>
             <Paper
                 sx={{
                     p: 2,

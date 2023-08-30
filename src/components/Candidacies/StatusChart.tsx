@@ -1,25 +1,27 @@
 import React from "react";
 
 // providers
-import { useCandidaciesContext } from "../../providers";
+import { useAppContext, useCandidaciesContext } from "../../providers";
 
 // helpers
 import { composeStatusChart, isStatusChartComplete } from "../../helpers";
 
 // packages
-import { Divider, Grid, Paper, Typography } from "@mui/material";
+import { Box, Grid, Paper, Typography } from "@mui/material";
 
+//FIXME: IPad Pro 12.9" (1024x1366) is not supported
 export const StatusChart: React.FC = (): JSX.Element => {
+    const { isDesktop } = useAppContext();
     const { allCandidacies } = useCandidaciesContext();
-    const statusChart = composeStatusChart(allCandidacies);
 
+    const statusChart = composeStatusChart(allCandidacies);
     const total = statusChart.reduce((sum, item) => sum + item.value, 0);
-    const chartSize = 200;
+    const chartSize = 210;
     const segmentSize = 76;
     let currentAngle = -90;
 
     return (
-        <Grid item xs={12} md={4} lg={3}>
+        <Grid item xs={12} md={4} lg={isDesktop ? 5 : 6}>
             <Paper
                 sx={{
                     p: 2,
@@ -31,20 +33,20 @@ export const StatusChart: React.FC = (): JSX.Element => {
                 <div className="pieChart">
                 {allCandidacies.length ? (
                     <>
-                        <Divider>
+                        <Box>
                             {statusChart.map(({ color, name }, idx) => (
                                 <Typography 
                                     key={idx} 
                                     component="span" 
                                     variant="body2" 
                                     color={color}
-                                    ml={1}
-                                    mr={1}
+                                    ml={0.8}
+                                    mr={0.8}
                                 >
                                     {name}
                                 </Typography>
                             ))}
-                        </Divider>
+                        </Box>
                         {isStatusChartComplete(statusChart) ? (
                             <svg width={chartSize} height={chartSize}>
                                 <circle

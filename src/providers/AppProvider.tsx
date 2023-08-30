@@ -31,6 +31,7 @@ const AppContext = createContext<IAppProviderProps>({
     secondaryColor: defaultSecondaryColor,
     isMobile: false,
     isTablet: false,
+    isDesktop: false,
     toggleThemeMode: () => { },
     setPrimaryColor: () => { },
     setSecondaryColor: () => { },
@@ -53,6 +54,7 @@ export const AppProvider = ({ children }: Props) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
     const isTablet = useMediaQuery(theme.breakpoints.down("md"));
+    const isDesktop = useMediaQuery(theme.breakpoints.up(1250));
     const themeConfig = createTheme({
         palette: {
             mode: themeMode,
@@ -146,6 +148,7 @@ export const AppProvider = ({ children }: Props) => {
         secondaryColor,
         isMobile,
         isTablet,
+        isDesktop,
         toggleThemeMode,
         setPrimaryColor,
         setSecondaryColor,

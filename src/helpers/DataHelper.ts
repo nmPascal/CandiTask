@@ -108,7 +108,7 @@ export const getAppointedCandidacies = (
     candidacies: ICandidacy[]
 ): ICandidacy[] => {
     return candidacies.filter(
-        (candidacy) => candidacy.status === ECandidacyStatus.ACCEPTED
+        (candidacy) => candidacy.status === ECandidacyStatus.WAITING
     );
 };
 
