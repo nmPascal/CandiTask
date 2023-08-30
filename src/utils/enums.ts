@@ -22,7 +22,8 @@ export enum ECandidacyRemote {
 export enum ECandidacyStatus {
     PENDING = "pending",
     REJECTED = "rejected",
-    DONE = "done",
+    WAITING = "waiting",
+    ACCEPTED = "accepted",
 }
 
 export enum EEditData {

@@ -52,12 +52,14 @@ export const getPopularCompanies = (companies: ICompany[]): ICompany[] => {
 
 export const getStatusColor = (status: ECandidacyStatus): string => {
     switch (status) {
-        case ECandidacyStatus.DONE:
+        case ECandidacyStatus.ACCEPTED:
             return "#08CC77";
         case ECandidacyStatus.PENDING:
             return "#F5B218";
         case ECandidacyStatus.REJECTED:
             return "#F21B7D";
+        case ECandidacyStatus.WAITING:
+            return "#3498db";
         default:
             return "#000000";
     }
@@ -67,9 +69,10 @@ export const composeStatusChart = (
     candidacies: ICandidacy[] | ICandidacy
 ): IStatusChart[] => {
     const statusCount: Record<ECandidacyStatus, number> = {
-        [ECandidacyStatus.DONE]: 0,
+        [ECandidacyStatus.ACCEPTED]: 0,
         [ECandidacyStatus.PENDING]: 0,
         [ECandidacyStatus.REJECTED]: 0,
+        [ECandidacyStatus.WAITING]: 0,
     };
 
     if (Array.isArray(candidacies)) {
@@ -105,7 +108,7 @@ export const getAppointedCandidacies = (
     candidacies: ICandidacy[]
 ): ICandidacy[] => {
     return candidacies.filter(
-        (candidacy) => candidacy.status === ECandidacyStatus.DONE
+        (candidacy) => candidacy.status === ECandidacyStatus.ACCEPTED
     );
 };
 
