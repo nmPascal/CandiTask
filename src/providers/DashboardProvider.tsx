@@ -34,6 +34,7 @@ export const useDashboardContext = () => useContext(DashboardContext);
 
 export const DashboardProvider = ({ children }: Props) => {
     const { isMobile, isTablet } = useAppContext();
+
     const [drawerIsOpen, setDrawerIsOpen] = useState<boolean>(false);
     const [currentTab, setCurrentTab] = useState<IDrawerItem>(
         DrawerItemsHelper.getItems(EDrawerItems.PRIMARY)[0]
@@ -43,6 +44,9 @@ export const DashboardProvider = ({ children }: Props) => {
         setDrawerIsOpen(!drawerIsOpen);
     };
 
+    /**
+     * Close the drawer when the screen size is mobile or tablet
+     */
     useEffect(() => {
         setDrawerIsOpen(!isMobile && !isTablet);
     }, [isMobile, isTablet]);

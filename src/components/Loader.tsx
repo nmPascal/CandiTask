@@ -13,7 +13,7 @@ export const Loader: FC = (): JSX.Element => {
             size={60}
             lineWeight={3.5}
             speed={1} 
-            color={theme.palette.primary.main} 
+            color={theme.palette.primary.main}
         />
     );
 };

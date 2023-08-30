@@ -54,8 +54,11 @@ export const UserProvider = ({ children }: Props) => {
                 setUser({ userId, name, email, registration });
                 setIsLoading(false);
             }, (err) => {
-                setError(err.message);
+                if (err.code !== 401) {
+                    setError(err.message);
+                }
                 setUser(null);
+                setIsLoading(false);
             });
         }
     };
@@ -64,7 +67,10 @@ export const UserProvider = ({ children }: Props) => {
         const { email, password, name } = newUser;
         const promise = account.create(ID.unique(), email, password, name);
 
-        promise.then(() => setFormType(EFormTypes.LOGIN), (err) => setError(err.message));
+        promise.then(() => setFormType(EFormTypes.LOGIN), (err) => {
+            console.log('~> err', err); //REMOVE
+            setError(err.message)
+        });
     };
 
     const signIn = (credentials: IUserCredentials) => {
