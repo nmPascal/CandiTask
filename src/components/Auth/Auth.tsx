@@ -18,7 +18,7 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 // components
-import { Copyright } from "../Copyright";
+import { Copyright } from "../Shared/Copyright";
 import { SignUp } from "./SignUp";
 import { SignIn } from "./SignIn";
 

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 // utils
-import { jobBoardList } from '../utils';
+import { jobBoardList } from '../../utils';
 
 // packages
 import {

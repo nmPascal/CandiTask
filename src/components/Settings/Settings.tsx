@@ -1,6 +1,6 @@
 import { FC } from "react";
 // providers
-import { useAppContext } from "../providers";
+import { useAppContext } from "../../providers";
 
 // packages
 import {

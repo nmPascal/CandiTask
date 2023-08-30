@@ -9,7 +9,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 
 // components
-import { Copyright } from "../Copyright";
+import { Copyright } from "../Shared/Copyright";
 import { AppBar } from "./AppBar";
 import { Drawer } from "./Drawer";
 
