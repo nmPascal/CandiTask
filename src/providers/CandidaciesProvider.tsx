@@ -9,7 +9,7 @@ import {
 } from "react";
 
 // providers
-import { useUserContext, useDashboardContext, useAppContext } from ".";
+import { useUserContext, useDashboardContext } from ".";
 
 // interfaces
 import {
@@ -54,11 +54,9 @@ const DATABASE_ID = import.meta.env.VITE_APPWRITE_DATABASE_ID;
 const COLLECTION_ID = import.meta.env.VITE_APPWRITE_CANDICACIES_COLLECTION_ID;
 
 export const CandidaciesProvider = ({ children }: Props) => {
-    const { isTablet } = useAppContext();
     const { user } = useUserContext();
     const { setCurrentTab } = useDashboardContext();
 
-    const [isFirstLoad, setIsFirstLoad] = useState<boolean>(true);
     const [allCandidacies, setAllCandidacies] = useState<ICandidacy[]>([]);
     const [chosenCand, setChosenCand] = useState<ICandidacy | null>(null);
     const [allCompanies, setAllCompanies] = useState<ICompany[]>([]);
@@ -160,7 +158,6 @@ export const CandidaciesProvider = ({ children }: Props) => {
             return;
         }
         getCandidacies();
-        setIsFirstLoad(false);
     }, [user]);
 
     /**
@@ -168,8 +165,6 @@ export const CandidaciesProvider = ({ children }: Props) => {
      */
     useEffect(() => {
         setAllCompanies(composeCompanyData(allCandidacies));
-        if (isFirstLoad || isTablet) return;
-        setChosenCand(allCandidacies[allCandidacies.length - 1]);
     }, [allCandidacies]);
 
     const propsValues = {
