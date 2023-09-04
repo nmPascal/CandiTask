@@ -58,6 +58,7 @@ export const CandidaciesProvider = ({ children }: Props) => {
     const { setCurrentTab } = useDashboardContext();
 
     const [allCandidacies, setAllCandidacies] = useState<ICandidacy[]>([]);
+	const [addProcess, setAddProcess] = useState<boolean>(false);
     const [chosenCand, setChosenCand] = useState<ICandidacy | null>(null);
     const [allCompanies, setAllCompanies] = useState<ICompany[]>([]);
     const [error, setError] = useState<string>("");
@@ -87,6 +88,7 @@ export const CandidaciesProvider = ({ children }: Props) => {
      */
     const createCandidacy = (newCandidacy: INewCandidacy) => {
         if (!user) return;
+		setAddProcess(true);
 
         if (!newCandidacy.company) return setError("Company is required");
         if (!newCandidacy.position) return setError("Position is required");
@@ -165,6 +167,10 @@ export const CandidaciesProvider = ({ children }: Props) => {
      */
     useEffect(() => {
         setAllCompanies(composeCompanyData(allCandidacies));
+
+		if (!addProcess) return;
+		setChosenCand(allCandidacies[allCandidacies.length - 1]);
+		setAddProcess(false);
     }, [allCandidacies]);
 
     const propsValues = {
